@@ -2,8 +2,8 @@ var width = 720;
 var height = 405;
  
 var Loans = [];
-//var SectorLoans =[];
-var SectorLoans = [ ["Food", 300], ["Transportation", 575],["Arts", 200],["Food", 400],["Services", 250]]
+var SectorLoans =[];
+//var SectorLoans = [ ["Food", 300], ["Transportation", 575],["Arts", 200],["Food", 400],["Services", 250]]
 
 
 function kivaLoanEntry(id, funding_amount, sector, country, partner_id, loandate ) {
