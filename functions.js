@@ -23,26 +23,16 @@ function kivaLoanEntry(id, funding_amount, sector, country, partner_id, loandate
   function getFrequencyHashtable (array) {
     var hashtable = {};
     array.forEach(function (element) {
-        console.log(element);
+        //console.log(element);
         if (!hashtable.hasOwnProperty(element[0])) {
-            hashtable[element[0]] = 1;
+            hashtable[element[0]] = element[1];
         } else {
-            hashtable[element[0]] += 1;
+            hashtable[element[0]] += element[1];
         }
     });
     return hashtable;
 }
 
-
-function loadDataset() {
-    loadCSV().then( function (a) {
-        prepareSectorAggregates();
-    });
-
-    
-
-    console.log("Dataset loading complete.");
-}
 
 function loadCSV(){
     d3.csv("data/kiva_mini.csv", function(data) {
@@ -52,6 +42,14 @@ function loadCSV(){
         //console.log(Loans)
     });
 }
+
+function loadDataset() {
+    loadCSV();
+    prepareSectorAggregates();    
+
+    console.log("Dataset loading complete.");
+}
+
 
 function prepareSectorAggregates() {
     console.log(SectorLoans);
