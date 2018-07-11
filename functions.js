@@ -1,5 +1,7 @@
 var width = 720;
 var height = 405;
+ 
+ var Loans = [];
 
 function kivaLoanEntry(id, funding_amount, sector, country, partner_id, loandate ) {
     this.id = id;
@@ -10,16 +12,21 @@ function kivaLoanEntry(id, funding_amount, sector, country, partner_id, loandate
     this.loandate = loandate;
   };
  
-  //4.
-  var Loans = [];
+  function AddLoan(row) {
+    Loans.push(new kivaLoanEntry(row.id, row.funded_amount, row.sector, row.country, row.partner_id, row.date));
+  }
+ 
 
 function loadDataset() {
     
     d3.csv("data/kiva_mini.csv", function(data) {
         console.log(data[0]);
-        Loans = data.map(function(d) { return [ +d["id"], +d["funded_amount"], d["sector"], ["country"], +d["partner_id"], d["date"] ]; });
+        //Loans = data.map(function(d) { return [ +d["id"], +d["funded_amount"], d["sector"], ["country"], +d["partner_id"], d["date"] ]; });
+        data.map(AddLoan)
         console.log(Loans)
     });
+
+    console.log("Dataset loading complete.");
 }
 
 function updateViz(data)
