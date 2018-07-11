@@ -33,10 +33,12 @@ function kivaLoanEntry(id, funding_amount, sector, country, partner_id, loandate
 
 
 function loadDataset() {
-    loadCSV();
+    loadCSV().then( function (a) {
+        prepareSectorAggregates();
+    });
 
-    prepareSectorAggregates();
     
+
     console.log("Dataset loading complete.");
 }
 
