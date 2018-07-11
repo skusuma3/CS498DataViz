@@ -17,7 +17,7 @@ function loadDataset() {
     
     d3.csv("data/kiva_mini.csv", function(data) {
         console.log(data[0]);
-        Loans = data.map(function(d) { return [ +d["id"], +d["funded_amount"], +d["sector"], +["country"], +d["partner_id"], +d["date"] ]; });
+        Loans = data.map(function(d) { return [ +d["id"], +d["funded_amount"], d["sector"], ["country"], +d["partner_id"], d["date"] ]; });
         console.log(Loans)
     });
 }
