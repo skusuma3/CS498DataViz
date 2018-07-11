@@ -21,6 +21,7 @@ function kivaLoanEntry(id, funding_amount, sector, country, partner_id, loandate
   function getFrequencyHashtable (array) {
     var hashtable = {};
     array.forEach(function (element) {
+        console.log(element);
         if (!hashtable.hasOwnProperty(element[0])) {
             hashtable[element[0]] = 1;
         } else {
