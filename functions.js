@@ -1,15 +1,25 @@
 var width = 720;
 var height = 405;
-var dataset = []
+
+function kivaLoanEntry(id, funding_amount, sector, country, partner_id, loandate ) {
+    this.id = id;
+    this.funding_amount = funding_amount;
+    this.sector = sector;
+    this.country = country;
+    this.partner_id = partner_id;
+    this.loandate = loandate;
+  };
+ 
+  //4.
+  var Loans = [];
 
 function loadDataset() {
     
     d3.csv("data/kiva_mini.csv", function(data) {
         console.log(data[0]);
-        dataset = data.map(function(d) { return [ +d["id"], +d["funded_amount"] ]; });
-        console.log(dataset)
+        Loans = data.map(function(d) { return [ +d["id"], +d["funded_amount"], +d["sector"], +["country"], +d["partner_id"], +d["date"] ]; });
+        console.log(Loans)
     });
-
 }
 
 function updateViz(data)
