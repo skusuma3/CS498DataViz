@@ -4,7 +4,7 @@ var height = 405;
 var Loans = [];
 var SectorLoans =[];
 //var SectorLoans = [ ["Food", 300], ["Transportation", 575],["Arts", 200],["Food", 400],["Services", 250]]
-
+var sectorAggregate = {};
 
 function kivaLoanEntry(id, funding_amount, sector, country, partner_id, loandate ) {
     this.id = id;
@@ -16,8 +16,15 @@ function kivaLoanEntry(id, funding_amount, sector, country, partner_id, loandate
   };
  
   function AddLoan(row) {
-    Loans.push(new kivaLoanEntry(row.id, row.funded_amount, row.sector, row.country, row.partner_id, row.date));
+    Loans.push(new kivaLoanEntry(+row.id, +row.funded_amount, row.sector, row.country, row.partner_id, row.date));
     SectorLoans.push( [row.sector, +row.funded_amount] );
+
+    if (!sectorAggregate.hasOwnProperty(row.sector)) {
+        sectorAggregate[row.sector] = row.funded_amount;
+    } else {
+        sectorAggregate[row.sector] += row.funded_amount;
+    }
+
   }
  
   function getFrequencyHashtable (array) {
@@ -39,19 +46,22 @@ function loadCSV(){
         //console.log(data[0]);
         //Loans = data.map(function(d) { return [ +d["id"], +d["funded_amount"], d["sector"], ["country"], +d["partner_id"], d["date"] ]; });
         data.map(AddLoan)
-        //console.log(Loans)
+        console.log(Loans)
+        console.log(sectorAggregate);
+        prepareSectorAggregates();
     });
 }
 
 function loadDataset() {
     loadCSV();
-    prepareSectorAggregates();    
+    //prepareSectorAggregates();    
 
     console.log("Dataset loading complete.");
 }
 
 
 function prepareSectorAggregates() {
+    console.log('prepare')
     console.log(SectorLoans);
     var l = getFrequencyHashtable(SectorLoans);
     console.log(l);
