@@ -1,7 +1,8 @@
 var width = 720;
 var height = 405;
  
- var Loans = [];
+var Loans = [];
+var SectorLoans =[];
 
 function kivaLoanEntry(id, funding_amount, sector, country, partner_id, loandate ) {
     this.id = id;
@@ -14,18 +15,34 @@ function kivaLoanEntry(id, funding_amount, sector, country, partner_id, loandate
  
   function AddLoan(row) {
     Loans.push(new kivaLoanEntry(row.id, row.funded_amount, row.sector, row.country, row.partner_id, row.date));
+    SectorLoans.push( [row.sector, funding_amount] );
   }
  
+  function getFrequencyHashtable (array) {
+    var hashtable = {};
+    array.forEach(function (element) {
+        if (!hashtable.hasOwnProperty(element[0])) {
+            hashtable[element[0]] = 1;
+        } else {
+            hashtable[element[0]] += 1;
+        }
+    });
+    return hashtable;
+}
+
 
 function loadDataset() {
     
     d3.csv("data/kiva_mini.csv", function(data) {
-        console.log(data[0]);
+        //console.log(data[0]);
         //Loans = data.map(function(d) { return [ +d["id"], +d["funded_amount"], d["sector"], ["country"], +d["partner_id"], d["date"] ]; });
         data.map(AddLoan)
-        console.log(Loans)
+        //console.log(Loans)
     });
-
+    console.log(SectorLoans);
+    var l = getFrequencyHashtable(SectorLoans);
+    console.log(l);
+    
     console.log("Dataset loading complete.");
 }
 
