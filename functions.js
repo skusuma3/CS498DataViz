@@ -20,9 +20,9 @@ function kivaLoanEntry(id, funding_amount, sector, country, partner_id, loandate
     SectorLoans.push( [row.sector, +row.funded_amount] );
 
     if (!sectorAggregate.hasOwnProperty(row.sector)) {
-        sectorAggregate[row.sector] = row.funded_amount;
+        sectorAggregate[row.sector] = +row.funded_amount;
     } else {
-        sectorAggregate[row.sector] += row.funded_amount;
+        sectorAggregate[row.sector] += +row.funded_amount;
     }
 
   }
