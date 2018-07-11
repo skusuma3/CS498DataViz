@@ -15,7 +15,7 @@ function kivaLoanEntry(id, funding_amount, sector, country, partner_id, loandate
  
   function AddLoan(row) {
     Loans.push(new kivaLoanEntry(row.id, row.funded_amount, row.sector, row.country, row.partner_id, row.date));
-    SectorLoans.push( [row.sector, funding_amount] );
+    SectorLoans.push( [row.sector, row.funded_amount] );
   }
  
   function getFrequencyHashtable (array) {
@@ -42,7 +42,7 @@ function loadDataset() {
     console.log(SectorLoans);
     var l = getFrequencyHashtable(SectorLoans);
     console.log(l);
-    
+
     console.log("Dataset loading complete.");
 }
 
