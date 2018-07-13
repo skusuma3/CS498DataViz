@@ -52,8 +52,20 @@ function loadCSV(){
     });
 }
 
+function loadCSV1(){
+    d3.csv("data/kiva_mini-cols.csv", function(data) {
+        //console.log(data[0]);
+        //Loans = data.map(function(d) { return [ +d["id"], +d["funded_amount"], d["sector"], ["country"], +d["partner_id"], d["date"] ]; });
+        data.map(AddLoan1)
+        //console.log(Loans)
+        //console.log(sectorAggregate);
+        //prepareSectorAggregates();
+    });
+}
+
+
 function loadDataset() {
-    loadCSV();
+    loadCSV1();
     //prepareSectorAggregates();    
 
     console.log("Dataset loading complete.");
