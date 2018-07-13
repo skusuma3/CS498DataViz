@@ -56,7 +56,7 @@ function loadCSV1(){
     d3.csv("data/kiva_mini-cols.csv", function(data) {
         //console.log(data[0]);
         //Loans = data.map(function(d) { return [ +d["id"], +d["funded_amount"], d["sector"], ["country"], +d["partner_id"], d["date"] ]; });
-        data.map(AddLoan1)
+        data.map(AddLoan)
         //console.log(Loans)
         //console.log(sectorAggregate);
         //prepareSectorAggregates();
