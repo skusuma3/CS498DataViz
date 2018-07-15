@@ -165,7 +165,7 @@ function updateViz(data)
         var g = svg.append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
         
-        d3.csv("data/kiva_loans-cols.csv", function(data) {
+        d3.csv("data/kiva_loans-cols.csv", function(d) {
             d.funded_amount =+d.funded_amount;
             return d;
         }, function(error, data) {
