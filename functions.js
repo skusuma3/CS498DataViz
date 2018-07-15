@@ -89,7 +89,7 @@ function loadCSV1(){
         console.log("SectorsAggregate:" + sectorAggregate.length);
 
         sectorH = sortHashTable(sectorAggregate);
-        //console.log(sectorH);
+        console.log(sectorH);
         //console.log(sectorH[0][0]);
         console.log("Dataset loading complete.");
         //prepareSectorAggregates();
