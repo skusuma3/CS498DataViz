@@ -134,9 +134,9 @@ function updateViz(data)
   
   // There are enought html elements and here following Update Pattern
   d3.select("#list").selectAll("li").data(sectorAggregate)
-    .text(function(d) { return d[0]; })
+    .text(function(d) { return d.key; })
     .enter().append("li")
-    .text(function(d)  {return d[0] + ":"+ d[1];})
+    .text(function(d)  {return d.key + ":"+ d.value;})
  
     d3.select("#listsorted").selectAll("li").data(sectorH)
     .text(function(d,i) { return d[i][0]; })
