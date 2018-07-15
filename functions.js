@@ -134,14 +134,16 @@ function updateViz(data)
   
   // There are enought html elements and here following Update Pattern
   d3.select("#list").selectAll("li").data(sectorAggregate)
-    .text(function(d) { return d.key; })
+    .text(function(d) { 
+        console.log(d + ":"+ i);
+        return d.key; })
     .enter().append("li")
     .text(function(d)  {return d.key + ":"+ d.value;})
  
-    d3.select("#listsorted").selectAll("li").data(sectorH)
-    .text(function(d,i) { return d[i][0]; })
-    .enter().append("li")
-    .text(function(d,i)  {return d[i][0] + ":"+ d[i][1];})
+    //d3.select("#listsorted").selectAll("li").data(sectorH)
+    //.text(function(d,i) { return d[i][0]; })
+    //.enter().append("li")
+    //.text(function(d,i)  {return d[i][0] + ":"+ d[i][1];})
 
     //d3.select("p")
     //    .datum(50)
