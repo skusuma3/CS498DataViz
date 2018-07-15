@@ -83,15 +83,15 @@ function loadCSV1(){
         //console.log(data[0]);
         //Loans = data.map(function(d) { return [ +d["id"], +d["funded_amount"], d["sector"], ["country"], +d["partner_id"], d["date"] ]; });
         data.map(AddLoan)
-        console.log(Loans.length)
-        console.log(sectorAggregate.length);
+        console.log("Loans Length:"+ Loans.length)
+        console.log("SectorsAggregate:" + sectorAggregate.length);
         
         sectorH = sortHashTable(sectorAggregate);
-        console.log(sectorH);
+        console.log("Sector:"+ sectorH);
 
         console.log("Dataset loading complete.");
         //prepareSectorAggregates();
-
+        updateViz(sectorH)
     });
 }
 
