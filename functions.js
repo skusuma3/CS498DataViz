@@ -83,17 +83,19 @@ function loadCSV1(){
         //console.log(data[0]);
         //Loans = data.map(function(d) { return [ +d["id"], +d["funded_amount"], d["sector"], ["country"], +d["partner_id"], d["date"] ]; });
         data.map(AddLoan)
-        console.log("Loans Length:"+ Loans.length)
-        console.log("SectorsAggregate:" + sectorAggregate.length);
+        console.log("Loans Length:"+ Loans.length);
         
-        sectorH = sortHashTable(sectorAggregate);
-        console.log("Sector:"+ sectorH);
+        console.log(sectorAggregate);
+        console.log("SectorsAggregate:" + sectorAggregate.length);
 
+        sectorH = sortHashTable(sectorAggregate);
+        console.log(sectorH);
+        console.log(sectorH[0][0]);
         console.log("Dataset loading complete.");
         //prepareSectorAggregates();
         updateViz(sectorH)
+
         
-        document.getElementById("loader").style.display = "none";
     });
 }
 
@@ -128,18 +130,19 @@ function updateViz(data)
   // For each added element, append a rect element to the SVG.
   // For each deleted element, remove the old rect.
   document.getElementById("data").innerHTML=data;
-
+  document.getElementById("loader").style.display = "none";
+  
   // There are enought html elements and here following Update Pattern
   d3.select("#list").selectAll("li").data(sectorH)
     .text(function(d) { return d; })
     .enter().append("li")
     .text(function(d)  {return d;})
  
-    d3.select("p")
-        .datum(50)
-        .text(function(d) { 
-            return "Used existing paragraph element and the data " + d + " is assigned."; 
-        });
+    //d3.select("p")
+    //    .datum(50)
+    //    .text(function(d) { 
+     //       return "Used existing paragraph element and the data " + d + " is assigned."; 
+     //   });
 
     d3.select("div")
         .datum(100)
