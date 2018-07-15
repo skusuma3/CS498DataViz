@@ -86,7 +86,7 @@ function loadCSV1(){
         console.log("Loans Length:"+ Loans.length);
         
         console.log(sectorAggregate);
-        console.log("SectorsAggregate:" + sectorAggregate.length);
+        console.log("SectorsAggregate:" + sectorAggregate.count);
 
         sectorH = sortHashTable(sectorAggregate);
         console.log(sectorH);
@@ -135,10 +135,12 @@ function updateViz(data)
   // There are enought html elements and here following Update Pattern
   d3.select("#list").selectAll("li").data(sectorAggregate)
     .text(function(d) { 
-        console.log(d + ":"+ i);
+        console.log(d + ":" + i);
         return d.key; })
     .enter().append("li")
-    .text(function(d)  {return d.key + ":"+ d.value;})
+    .text(function(d)  {
+        console.log("enter:" + d + ":" + i);
+        return d.key + ":"+ d.value;})
  
     //d3.select("#listsorted").selectAll("li").data(sectorH)
     //.text(function(d,i) { return d[i][0]; })
