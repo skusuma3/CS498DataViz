@@ -163,13 +163,13 @@ function updateViz(data)
             return d;
             });
 
-    var xScale = d3.scale.ordinal()
-        .domain(d3.range(sectorH.length))
-        .rangeRoundBands([0, w], 0.05); 
+    //var xScale = d3.scale.ordinal()
+    //    .domain(d3.range(sectorH.length))
+    //    .rangeRoundBands([0, w], 0.05); 
 
-    var yScale = d3.scale.linear()
-        .domain([0, d3.max(sectorH.value)])
-        .range([0, h]);
+    //var yScale = d3.scale.linear()
+    //    .domain([0, d3.max(sectorH.value)])
+    //    .range([0, h]);
 
   // Each rect element should have the following properties
   // set as attributes:
