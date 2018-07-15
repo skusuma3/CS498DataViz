@@ -134,9 +134,9 @@ function updateViz(data)
   
   // There are enought html elements and here following Update Pattern
   d3.select("#list").selectAll("li").data(sectorH)
-    .text(function(d) { return d; })
+    .text(function(d) { return d[0]; })
     .enter().append("li")
-    .text(function(d)  {return d;})
+    .text(function(d)  {return d[0] + ":"+ d[1];})
  
     //d3.select("p")
     //    .datum(50)
@@ -154,29 +154,51 @@ function updateViz(data)
             return d;
             });
 
-var svg1 = d3.select("#viz")
-                .selectAll("rect")
-                .data(data);
-    svg1       
-        .attr("width", "15")
-        .attr("height", function (d) { return 10 *d;})
-        .attr("x", function(d,i) { return i*20;})
-        .attr("y", function(d) { return ( (height/2.0) - (5.0 * d) ); })
-        .attr("tokenid", function(d,i) { return (d * i * 64); })
-        .attr("fill", "steelblue ");
-    
-    svg1.enter()
-        .append("rect")
-        .attr("width", "15")
-        .attr("height", function (d) { return 10 *d;})
-        .attr("x", function(d,i) { return i*20;})
-        .attr("y", function(d) { return ( (height/2.0) - (5.0 * d) ); })
-        .attr("tokenid", function(d,i) { return (d * i * 64); })
-        .attr("fill", "steelblue ");
+    var svg = d3.select("svg"),
+        margin = {top: 20, right: 20, bottom: 30, left: 40},
+        width = +svg.attr("width") - margin.left - margin.right,
+        height = +svg.attr("height") - margin.top - margin.bottom;
+        
+        var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
+            y = d3.scaleLinear().rangeRound([height, 0]);
+        
+        var g = svg.append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        
+        d3.csv("data/kiva_loans-cols.csv", function(data) {
+            d.funded_amount =+d.funded_amount;
+            return d;
+        }, function(error, data) {
+            if(error) throw error;
 
-    svg1.exit()
-        .remove();
-
+            x.domain(data.map(function(d) { return d.sector; }));
+            y.domain([0, d3.max(data, function(d) { return d.funded_amount; })]);
+          
+            g.append("g")
+                .attr("class", "axis axis--x")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x));
+          
+            g.append("g")
+                .attr("class", "axis axis--y")
+                .call(d3.axisLeft(y).ticks(10, "%"))
+              .append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("y", 6)
+                .attr("dy", "0.71em")
+                .attr("text-anchor", "end")
+                .text("Frequency");
+          
+            g.selectAll(".bar")
+              .data(data)
+              .enter().append("rect")
+                .attr("class", "bar")
+                .attr("x", function(d) { return x(d.sector); })
+                .attr("y", function(d) { return y(d.funded_amount); })
+                .attr("width", x.bandwidth())
+                .attr("height", function(d) { return height - y(d.funded_amount); });
+          });
+            
   // Each rect element should have the following properties
   // set as attributes:
   // "width" = 15
