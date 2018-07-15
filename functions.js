@@ -5,10 +5,11 @@ var Loans = [];
 //var SectorLoans =[];
 //var SectorLoans = [ ["Food", 300], ["Transportation", 575],["Arts", 200],["Food", 400],["Services", 250]]
 var sectorAggregate = {};
+var sectorH = [];
 
-function kivaLoanEntry(id, funding_amount, sector, country, partner_id, loandate ) {
+function kivaLoanEntry(id, funded_amount, sector, country, partner_id, loandate ) {
     this.id = id;
-    this.funding_amount = funding_amount;
+    this.funded_amount = funded_amount;
     this.sector = sector;
     this.country = country;
     this.partner_id = partner_id;
@@ -40,6 +41,31 @@ function kivaLoanEntry(id, funding_amount, sector, country, partner_id, loandate
     return hashtable;
 }
 
+// And then get a sorted array without duplicates out of it
+function sortByFrequency (array) {
+    var hashtable = getFrequencyHashtable(array);
+    var tuples = [];
+    for (var key in hashtable) {
+        if (hashtable.hasOwnProperty(key)) {
+           tuples.push([key, hashtable[key]]);
+        }
+    }
+    return tuples.sort(function(a, b) { 
+        return a[1] < b[1] ? 1 : a[1] > b[1] ? -1 : 0;
+    });
+}
+
+function sortHashTable(hashSector) {
+    var tuples = [];
+    for (var key in hashSector) {
+        if (hashSector.hasOwnProperty(key)) {
+           tuples.push([key, hashSector[key]]);
+        }
+    }
+    return tuples.sort(function(a, b) { 
+        return a[1] < b[1] ? 1 : a[1] > b[1] ? -1 : 0;
+    });
+}
 
 function loadCSV(){
     d3.csv("data/kiva_mini.csv", function(data) {
@@ -59,8 +85,13 @@ function loadCSV1(){
         data.map(AddLoan)
         console.log(Loans.length)
         console.log(sectorAggregate.length);
+        
+        sectorH = sortHashTable(sectorAggregate);
+        console.log(sectorH);
+
         console.log("Dataset loading complete.");
         //prepareSectorAggregates();
+
     });
 }
 
@@ -74,9 +105,12 @@ function loadDataset() {
 function prepareSectorAggregates() {
     console.log('prepare')
     console.log(SectorLoans);
-    var l = getFrequencyHashtable(SectorLoans);
+    //var l = getFrequencyHashtable(SectorLoans);
+    var l = sortByFrequency(SectorLoans);
     console.log(l);
 }
+
+
 
 function updateViz(data)
 {
@@ -94,7 +128,7 @@ function updateViz(data)
   document.getElementById("data").innerHTML=data;
 
   // There are enought html elements and here following Update Pattern
-  d3.select("#list").selectAll("li").data([10, 20, 30, 25, 15])
+  d3.select("#list").selectAll("li").data(sectorH)
     .text(function(d) { return d; })
     .enter().append("li")
     .text(function(d)  {return d;})
@@ -114,29 +148,6 @@ function updateViz(data)
             console.log(this); // the current DOM object
             return d;
             });
-
-  var svg = d3.select("#decoy_viz")
-                .selectAll("rect")
-                .data(data);
-    svg       
-        .attr("width", "15")
-        .attr("height", function (d) { return 10 *d;})
-        .attr("x", function(d) { return d*20;})
-        .attr("y", function(d) { return ( (height/2.0) - (5.0 * d) ); })
-        .attr("tokenid", function(d,i) { return (d * i * 64); })
-        .attr("fill", "steelblue ");
-    
-    svg.enter()
-        .append("rect")
-        .attr("width", "15")
-        .attr("height", function (d) { return 10 *d;})
-        .attr("x", function(d) { return d*20;})
-        .attr("y", function(d) { return ( (height/2.0) - (5.0 * d) ); })
-        .attr("tokenid", function(d,i) { return (d * i * 64); })
-        .attr("fill", "steelblue ");
-
-    svg.exit()
-        .remove();
 
 var svg1 = d3.select("#viz")
                 .selectAll("rect")
