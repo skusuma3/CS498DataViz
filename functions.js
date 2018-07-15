@@ -92,6 +92,8 @@ function loadCSV1(){
         console.log("Dataset loading complete.");
         //prepareSectorAggregates();
         updateViz(sectorH)
+        
+        document.getElementById("loader").style.display = "none";
     });
 }
 
