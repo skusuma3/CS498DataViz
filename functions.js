@@ -19,10 +19,17 @@ function kivaLoanEntry(id, funded_amount, sector, country, partner_id, loandate 
  
   var sec = [];
   var secValues = []
+  var sectorFun = d3.map();
 
   function AddLoan(row) {
     Loans.push(new kivaLoanEntry(+row.id, +row.funded_amount, row.sector, row.country, row.partner_id, row.date));
     //SectorLoans.push( [row.sector, +row.funded_amount] );
+
+    if( sectorFun.has(row.sector) ) {
+        sectorFun.set(row.sector, sectorFun.get(row.sector) + row.funded_amount);
+    } else {
+        sectorFun.set(row.sector, +row.funded_amount);
+    }
 
     if (!sectorAggregate1.hasOwnProperty(row.sector)) {
         sectorAggregate1.push( row.sector, +row.funded_amount );
