@@ -181,12 +181,12 @@ function updateViz(data)
             return d;
             });
 
-    var w = 600;
+    var w = 700;
     var h = 250;
 
     //var xScale = d3.scaleOrdinal().domain(sectorFun.keys()).range([0,width])
     var xScale = d3.scaleBand()
-                    .domain(d3.range(sectorFun.keys().length))
+                    .domain(d3.range(sectorFun.values().length))
                     .rangeRound([0,width])
                     .paddingInner(0.05);
 
