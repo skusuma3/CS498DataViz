@@ -182,14 +182,18 @@ function updateViz(data)
             });
 
     var w = 600;
-    var h = 250;               
-        var xScale = d3.scale.ordinal()
-            .domain(d3.range(sectorFun.values().length))
-            .rangeRoundBands([0, w], 0.05); 
+    var h = 250;
 
-        var yScale = d3.scale.linear()
-        .domain([0, d3.max(sectorFun.values())])
-        .range([0, h]);
+    var xScale = d3.scaleOrdinal().domain(sectorFun.keys()).range([0,width])
+    var yScale = d3.scaleLinear().domain(sectorFun.values()).range([height,0])
+
+    //    var xScale = d3.scale.ordinal()
+    //        .domain(d3.range(sectorFun.values().length))
+    //        .rangeRoundBands([0, w], 0.05); 
+
+    //    var yScale = d3.scale.linear()
+    //    .domain([0, d3.max(sectorFun.values())])
+    //    .range([0, h]);
 
         //Create SVG element
         var svg = d3.select("body")
