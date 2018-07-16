@@ -26,16 +26,16 @@ function kivaLoanEntry(id, funded_amount, sector, country, partner_id, loandate 
     //SectorLoans.push( [row.sector, +row.funded_amount] );
 
     if( sectorFun.has(row.sector) ) {
-        sectorFun.set(row.sector, sectorFun.get(row.sector) + row.funded_amount);
+        sectorFun.set(row.sector, +sectorFun.get(row.sector) + +row.funded_amount);
     } else {
         sectorFun.set(row.sector, +row.funded_amount);
     }
 
-    if (!sectorAggregate1.hasOwnProperty(row.sector)) {
-        sectorAggregate1.push( row.sector, +row.funded_amount );
-    } else {
-        sectorAggregate1[row.sector] += +row.funded_amount;
-    }
+    //if (!sectorAggregate1.hasOwnProperty(row.sector)) {
+    //    sectorAggregate1.push( row.sector, +row.funded_amount );
+    //} else {
+    //    sectorAggregate1[row.sector] += +row.funded_amount;
+    //}
 
     if (!sectorAggregate.hasOwnProperty(row.sector)) {
         sectorAggregate[row.sector] = +row.funded_amount;
