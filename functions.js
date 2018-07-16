@@ -134,11 +134,11 @@ function updateViz(data)
   
   // There are enought html elements and here following Update Pattern
   d3.select("#list").selectAll("li").data(data)
-    .text(function(d) { 
+    .text(function(d,i) { 
         console.log(d + ":" + i);
         return d.key; })
     .enter().append("li")
-    .text(function(d)  {
+    .text(function(d,i)  {
         console.log("enter:" + d + ":" + i);
         return d.key + ":"+ d.value;})
  
