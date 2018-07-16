@@ -184,7 +184,12 @@ function updateViz(data)
     var w = 600;
     var h = 250;
 
-    var xScale = d3.scaleOrdinal().domain(sectorFun.keys()).range([0,width])
+    //var xScale = d3.scaleOrdinal().domain(sectorFun.keys()).range([0,width])
+    var xScale = d3.scaleBand()
+                    .domain(d3.range(sectorFun.keys().length))
+                    .rangeRound([0,width])
+                    .paddingInner(0.05);
+
     var yScale = d3.scaleLinear().domain(sectorFun.values()).range([height,0])
 
     //    var xScale = d3.scale.ordinal()
