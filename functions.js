@@ -5,7 +5,7 @@ var Loans = [];
 //var SectorLoans =[];
 //var SectorLoans = [ ["Food", 300], ["Transportation", 575],["Arts", 200],["Food", 400],["Services", 250]]
 var sectorAggregate = [];
-var sectorAggregate1 = {};
+var sectorAggregate1 = [];
 var sectorH = [];
 
 function kivaLoanEntry(id, funded_amount, sector, country, partner_id, loandate ) {
@@ -19,7 +19,7 @@ function kivaLoanEntry(id, funded_amount, sector, country, partner_id, loandate 
  
   var sec = [];
   var secValues = []
-  var sectorFun = d3.map();
+  var sectorFun = d3.map( );
 
   function AddLoan(row) {
     Loans.push(new kivaLoanEntry(+row.id, +row.funded_amount, row.sector, row.country, row.partner_id, row.date));
