@@ -181,6 +181,42 @@ function updateViz(data)
             return d;
             });
 
+    var w = 600;
+    var h = 250;               
+        var xScale = d3.scale.ordinal()
+            .domain(d3.range(sectorFun.values().length))
+            .rangeRoundBands([0, w], 0.05); 
+
+        var yScale = d3.scale.linear()
+        .domain([0, d3.max(sectorFun.values())])
+        .range([0, h]);
+
+        //Create SVG element
+        var svg = d3.select("body")
+            .append("svg")
+            .attr("width", w)
+            .attr("height", h);
+
+        //Create bars
+        svg.selectAll("rect")
+            .data(sectorFun.values(), function(d) { return d; })
+            .enter()
+            .append("rect")
+            .attr("x", function(d, i) {
+            return xScale(i);
+        })
+        .attr("y", function(d) {
+            return h - yScale(d);
+        })
+        .attr("width", xScale.rangeBand())
+        .attr("height", function(d) {
+            return yScale(d);
+        })
+        .attr("fill", function(d) {
+            return "rgb(0, 0, " + (d * 10) + ")";
+        })
+
+
     //var xScale = d3.scale.ordinal()
     //    .domain(d3.range(sectorH.length))
     //    .rangeRoundBands([0, w], 0.05); 
