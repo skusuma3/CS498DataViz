@@ -212,7 +212,7 @@ function updateViz(data)
         .attr("y", function(d) {
             return h - yScale(d);
         })
-        .attr("width", xScale.rangeBand())
+        .attr("width", xScale.bandwidth())
         .attr("height", function(d) {
             return yScale(d);
         })
