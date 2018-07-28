@@ -3,6 +3,12 @@
 ## Intention:
     Intention of this project is to project data visualizations based on Kiva Crowd Funding Data Sources available in [Kaggle.org](https://www.kaggle.com/kiva/data-science-for-good-kiva-crowdfunding)
 
+## Procedure
+    Aggregated data into different csv files from above data source for easy visualizations.
+
+## Viz Methodoloy
+    Followed Hybrid Narrative Starting with Interative Slideshow and followed Drildown as needed.
+    
 ## Web Url:
 Visit [Kiva Crowd Funding Data Visualizations](https://skusuma3.github.io/CS498DataViz/KivaFunding.htm)
 
