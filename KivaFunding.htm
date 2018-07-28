@@ -15,317 +15,15 @@
     <head>
         <link rel="stylesheet" type="text/css" href="dist/fullpage.css" />
         <link rel="stylesheet" type="text/css" href="dist/examples.css" />
+        <link rel="stylesheet" type="text/css" href="Kiva.css" />
+
+        <script type="text/javascript" src="Kiva.js"></script>
 
         <!--link rel="stylesheet" type="text/css" href="https://github.com/alvarotrigo/fullPage.js/blob/master/dist/fullpage.css" />
         <link rel="stylesheet" type="text/css" href="https://github.com/alvarotrigo/fullPage.js/blob/master/examples/examples.css" /-->
-        <style>
-            /* Common */
-           .div {
-                text-align: justify; 
-                margin-left: 200px;
-                margin-right:200px;
-                margin-top:20px;
-                color:white;
-           }
 
-           .divChart {
-                width: 100%;
-               /* height:100%;
-               vertical-align: top;*/
-               align-content: center;
-           }
-
-           intro {
-               text-align: center;
-           }
-
-           h2 {
-               font-size: 20px;
-               text-decoration: underline;
-               font-weight: bold;
-           }
-
-            .label {
-                font-weight: bold;
-                font-size:15px;
-            }
-
-            .annotate {
-                font-size:medium;
-                fill:white;
-                border:1px;
-                border-color: gray;
-                border-radius: 8px;  
-
-            }
-
-            div.tooltip {   
-                position: absolute;           
-                text-align: left;           
-                width: 200px;                  
-                height: auto;                 
-                padding: 10px;             
-                font: 12px sans-serif;        
-                background: lightsteelblue;   
-                border: 0px;      
-                border-radius: 8px;           
-                pointer-events: none;         
-            }
-
-            ul { 
-                display: block;
-                list-style-type: disc;
-                margin-top: 1em;
-                margin-bottom: 1 em;
-                margin-left: 0;
-                margin-right: 0;
-                padding-left: 40px;
-            }
-
-            ol {
-                display: block;
-                list-style-type: decimal;
-                margin-top: 1em;
-                margin-bottom: 1em;
-                margin-left: 0;
-                margin-right: 0;
-                padding-left: 40px;
-            }
-
-            .key-dot {
-                display: inline-block;
-                height: 10px;
-                margin-right: .5em;
-                width: 10px;
-            }
-
-            .legend2 {
-                float:left;
-                margin-right: 1em;
-                padding:10,10,0,5;
-                font-size: 12px;
-            }
-
-           /* rect:hover {
-                fill: yellowgreen ;
-            } */
-            
-            .regular-checkbox {
-                -webkit-appearance: none;
-                background-color: #fafafa;
-                border: 1px solid #cacece;
-                box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
-                padding: 9px;
-                border-radius: 3px;
-                display: inline-block;
-                position: relative;
-            }
-            .regular-checkbox:active, .regular-checkbox:checked:active {
-                box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
-            }
-
-            .regular-checkbox:checked {
-                background-color: #e9ecee;
-                border: 1px solid #adb8c0;
-                box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
-                color: #99a1a7;
-            }
-
-            .regular-checkbox:checked:after {
-                content: '\2714';
-                font-size: 14px;
-                position: absolute;
-                top: 0px;
-                left: 3px;
-                color: #99a1a7;
-                
-            }
-            
-                        
-            .regular-radio:checked {
-                /*border: 5px solid #0DFF92;*/
-                border-radius: 16px;
-            }
-
-            .regular-radio{
-                /*background: #0DFF92;*/
-                border-radius: 16px;
-            }
-
-            
-           /*Section 3 - Chart1*/
-           .axis {
-                font: 10px sans-serif;
-            }
-
-            .axis path,
-            .axis line {
-            fill: none;
-            stroke: #D4D8DA;
-            stroke-width: 2px;
-            shape-rendering: crispEdges;
-            }
-
-            .line {
-                fill: none;
-                stroke: lightgreen;
-                stroke-width: 5px;
-            }
-           .overlay {
-                fill: none;
-                pointer-events: all;
-            }
-
-            .focus circle {
-                fill: #F1F3F3;
-                stroke: darkgreen;
-                stroke-width: 5px;
-            }
-            
-            .hover-line {
-                stroke: darkgreen;
-                stroke-width: 2px;
-                stroke-dasharray: 3,3;
-            }
-            
-            .dot {
-                fill:blue;
-            }
-            /*Section 3 - Chart2*/
-            
-            /* Section 3- Chart 3 */
-            .sectors_3 {
-                border: 1px solid gray;
-                padding:5px;
-            }
-            
-            .axis rect.rectbar:hover {
-                fill: yellowgreen;
-            }
-        </style>
         <script type="text/javascript">
-            $(document).ready(function() {
-                $('#myContainer').fullpage({
-                    sectionsColor: ['#ff73a1', '#4BBFC3', '#7BAABE', '#4BBFC3', '#ff73a1', '#ff73a1'],
-                    anchors: ['firstPage', 'secondPage', '3rdPage', '4thPage','5thPage'],
-                    //menu: '#menu',
-                    slidesNavigation: true,
-                    scrollHorizontally: true,
-                    scrollBar: true,
-                    fixedElements: '#header, .footer',
-                    scrollHorizontallyKey: 'YWx2YXJvdHJpZ28uY29tX01mU2MyTnliMnhzU0c5eWFYcHZiblJoYkd4NVNRcg==',
-                    afterRender: function(){
-		                var pluginContainer = this;
-		                console.log("The resulting DOM structure is ready");
-                    },
-                    afterLoad: function(origin, destination, direction){
-                        console.log("afterLoad--" + "anchorLink: " + destination + " index: " + destination.index);
-                        
-                        switch (destination.index) {
-                            case 0:
-                                //No action    
-                                break;
-                            case 1:
-                                
-                                
-
-                                break;
-                            case 2:
-                                //Loaded for the first time when loaded from section 3
-                                drawChart3_1();
-                                break;
-                            case 3:
-                                //Loaded for the first time when loaded from section 4
-                                drawChart4_1();
-                                break;
-                            default:
-                                break;
-                        }
-                        if(destination.index == 0) {
-
-                        }
-                        //using index
-                        if(origin != null && origin.index == 2){
-                            //alert("Section 3 ended loading");
-                        }
-
-                        //using anchorLink
-                        if(origin != null && origin.anchor == 'secondSlide'){
-                            //alert("Section 2 ended loading");
-                        }
-                    },
-                    afterSlideLoad: function(anchorLink, index, slideAnchor, slideIndex){
-                        console.log("slideLoad--" + "anchorLink: " + anchorLink + " index: " + index + " slideAnchor: " + slideAnchor + " slideIndex: " + slideIndex);
-                        
-                        //anchorLink: Page or Section
-                        //slideAnchor: Destination slide Index
-                        switch (anchorLink.anchor) {
-                            case "firstPage":
-                                switch (slideAnchor.index) {
-                                    case 0:
-                                        
-                                        break;
-                                    case 1:
-                                        
-                                        break;
-                                    case 2:
-                                        break;
-                                    default:
-                                        break;
-                                }
-                                break;
-                            case "secondPage":
-
-                            case "3rdPage":
-
-                                switch (slideAnchor.index) {
-                                    case 0:
-                                        drawChart3_1();
-                                        break;
-                                    case 1:
-                                        drawChart3_2();
-                                        break;
-                                    case 2:
-                                        drawChart3_3();
-                                        break;
-                                    default:
-                                        break;
-                                }
-                                case "4thPage":
-
-                                    switch (slideAnchor.index) {
-                                        case 0:
-                                            drawChart4_1();
-                                            break;
-                                        case 1:
-                                            drawChart4_2();
-                                            break;
-                                        case 2:
-                                            drawChart4_3();
-                                            break;
-                                        default:
-                                            break;
-                                    }
-                            default:
-                                break;
-                        }
-
-                        //3rd Page Index 2 = 3.2
-                        if(anchorLink.anchor == "3rdPage") {
-
-                            if(anchorLink.index == 2) {
-
-                            }
-                        }
-
-
-                    },
-                    onSlideLeave: function(anchorLink, index, slideIndex, direction){
-                        console.log("----------------");
-                        console.log("onSlideLeave--" + "anchorLink: " + anchorLink + " index: " + index + " slideIndex: " + slideIndex + " direction: " + direction);
-                    }
-                });
-            });
+            
 
             </script>
 
@@ -349,17 +47,20 @@
                                 <br/>
                             <div class="div">
                                 <h2 style="margin-left:-40px"><b>Approach:</b> </h2>
-                                <span>Following the Hybrid Model of Data visualization starting with Interactive slideshow and then drilldown approach for each slide.</span>
+                                <span>Following the Hybrid Model of Data visualization with balancing Autor-Driven and giving flexibility to the Reader driving towards Reader-Driven approaches in each slide. <br/>
+                                     Slides with Charts starts with Interactive slideshow and then user can drilldown with various parameters, triggers.</span>
                                 <br/><br/>
-
+                               
                                 <h2 style="margin-left:-40px"><b>Rules: </b></h2>
 
                                 <h2><b>Horizontal Scrolling: </b></h2>
-                                <span>Follows Drilldown approach ( expands the informations shown on the main slide but return back to current slide parent).
-                                Drill-down enables user to narrow data selection through either setting data filters to specific dictionary values or/and achieve similar result by visually choosing regions (e.g. rectangles) on interactive charts, so only values associated with regions will stay in data selection. In 2nd case charts behave as filters and as such eliminating need for filters if user prefer to use only selection tools like mouse.
+                                <span>Follows Drilldown approach ( expands the informations shown on the main slide but return back to current slide parent), reader can navigate to any of slides in that scope.
+                                In each Drill-down slide reader was allowed to use triggers to narrow data selection through either setting data filters to specific dictionary values or/and achieve similar result by visually choosing regions (e.g. rectangles) on interactive charts, so only values associated with regions will stay in data selection. 
                                 </span>
-                                <span>User can jump between sub-slides (horizontal) if necessary using small icons in the bottom though, but cannot jump between pages(slides)</span>
-                                </br><br/>
+                                <span>Visual Structuring: user was provided dots at the bottom of the screen, enalbes to know where they are and giving them flexibility to jump as needed.</span>
+                                </br>
+                                <span></span>
+                                <br/>
                                 <h2><b>Vertical Scrolling:</b></h2>
                                 <span>Follows Interactive Slideshow. Allowing user to navigate through owner design approach</span>
 
@@ -397,30 +98,54 @@
                 <!-- Section:2 Essay Section -->
                 <div class="section">
                     <h1>Essay</h1>
-                    <div class="div">
-                        <h2>Overview:</h2>
-                        <span>
-                            Upon partial analysis of the data, trying to showcase available datapoints into Data visualization for better understanding the crowdfunding with respect to timelines, sectors, country, partners etc.<br/>
-                            In this effort, i was able to concentrate on timelines, sectors, countries, partners and ignored many other data points that are available in the dataset. <br/>
-                            Below are the two approaches built to better convey the understanding.
-                        </span>
-                        <br/><br/>
+                    <div class="slide">
+                        <div class="div">
+                            <h2>Overview:</h2>
+                            <span>
+                                Upon partial analysis of the data, trying to showcase available datapoints into Data visualization for better understanding the crowdfunding with respect to timelines, sectors, country, partners etc.<br/>
+                                In this effort, i was able to concentrate on timelines, sectors, countries, partners and ignored many other data points that are available in the dataset. <br/>
+                                Below are the two approaches built to better convey the understanding.
+                            </span>
+                            <br/><br/>
 
-                        <h2>Narrative:</h2>
-                        <div>
-                            Following is the process following in storytelling or Narrative Visualization <br/>
-                            <ol>
-                                <li>Incorporating the Hybrid Model for Narration. 
-                                    <br/>&nbsp;&nbsp;&nbsp;Horizontal scrolling signifies  Interactive Slideshow in traversing between Scenes and 
-                                    <br/>&nbsp;&nbsp;&nbsp;Vertical Scrolling enables Drill down model in between scenes.
-                                </li>
-                                <li>Two different Scenes are focussed. Timeline based on Funding Amount and Country Based.
-                                </li>
-                                <li>Funding Amount Displayed in terms of Millions with 2 digits prefix.</li>
-                            </ol>
+                            <h2>Narrative:</h2>
+                            <table>
+                                <tr>
+                                    <td>
+                                    <div>
+                                        Following is the process following in storytelling or Narrative Visualization <br/>
+                                        <ol>
+                                            <li>Genre -> Incorporating the Hybrid Model (Autor-Driven and then Reader-Driven) for Narration. 
+                                                <br/>&nbsp;&nbsp;&nbsp;Author-Driven: Vertical Scrolling enables Drill down model in between scenes.
+                                                <br/>&nbsp;&nbsp;&nbsp;Reader-Driven: Horizontal scrolling signifies  Interactive Slideshow in traversing between Scenes and 
+                                            </li>
+                                            <li>Design Dimensions:
+                                                <br/>&nbsp;&nbsp;&nbsp;Highlighting: Each slide has annotations to focus on important events
+                                                <br/>&nbsp;&nbsp;&nbsp;Tranistion guidance: Slides with drill down has left and right arrows
+                                                <br/>&nbsp;&nbsp;&nbsp;Messaging: each chart enabled with Tooltips to inform the required message.
+                                                <br/>&nbsp;&nbsp;&nbsp;Visual Structuring: Enabled scrollbar for vertical navigation(Author-Driven) and dots ( bottom of screen) for Horizontal slides(Reader-Driven)
+                                            </li>
+                                            <li>Two different Scenes are focussed. Timeline based on Funding Amount and Country Based.
+                                            </li>
+                                            <li>Funding Amount Displayed in terms of Millions with 2 digits prefix.</li>
+                                        </ol>
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <img src="img/structure.PNG" alt="Visual Structuring">
+                                </td>
+                                </tr>
+                            </table>
+
+                            <b>Note:</b> Using FullPage.js and you will see some Licensing errors if watched in Developer Tools. 
+                                Please Ignore and it won't affect the usage.
 
                         </div>
-                        <br/><br/>
+                    </div>
+
+                    <div class="slide">
+                        <div class="div">
                         <h2>Charts:</h2>
                         <ol>
                             <li>
@@ -466,8 +191,6 @@
                             </li>
                         </ol>
 
-                        <b>Note:</b> Using FullPage.js and you will see some Licensing errors if watched in Developer Tools. 
-                        Please Ignore and it won't affect the usage.
                     </div>
                 </div>
 
@@ -648,7 +371,7 @@
                         <h1>Conclusion</h1>
                         <div class="div">
                             <h2>Methodology</h2>
-                                    Following the Hybrid Model using Interactive Slideshow with Drilldown <br/>
+                                    Following the Hybrid Model (Author-Driven and Reader-Driven) using Interactive Slideshow <br/>
                                     Charts are Based on: <br/>
                                     <ol>
                                     <li>    Timeline Based: Main strategy around these charts is to find the funding spread across different sectors with various timelines into scope.</li>
