@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+<script type="text/javascript" src="dist/fullpage.js"></script>
+<script type="text/javascript" src="dist/fullpage.extensions.min.js"></script>
+
+<!--script type="text/javascript" src="https://github.com/alvarotrigo/fullPage.js/blob/master/dist/fullpage.extensions.min.js"></script>
+<script type="text/javascript" src="https://github.com/alvarotrigo/fullPage.js/blob/master/dist/fullpage.js"></script-->
+
+<script type="text/javascript" src="KivaFunding.js"></script>
+
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="dist/fullpage.css" />
+        <link rel="stylesheet" type="text/css" href="dist/examples.css" />
+
+        <!--link rel="stylesheet" type="text/css" href="https://github.com/alvarotrigo/fullPage.js/blob/master/dist/fullpage.css" />
+        <link rel="stylesheet" type="text/css" href="https://github.com/alvarotrigo/fullPage.js/blob/master/examples/examples.css" /-->
+        <style>
+            /* Common */
+           .div {
+                text-align: justify; 
+                margin-left: 200px;
+                margin-right:200px;
+                margin-top:20px;
+                color:white;
+           }
+
+           .divChart {
+                width: 100%;
+               /* height:100%;
+               vertical-align: top;*/
+               align-content: center;
+           }
+
+           intro {
+               text-align: center;
+           }
+
+           h2 {
+               font-size: 20px;
+               text-decoration: underline;
+               font-weight: bold;
+           }
+
+            .label {
+                font-weight: bold;
+                font-size:15px;
+            }
+
+            .annotate {
+                font-size:medium;
+                fill:white;
+                border:1px;
+                border-color: gray;
+                border-radius: 8px;  
+
+            }
+
+            div.tooltip {   
+                position: absolute;           
+                text-align: left;           
+                width: 200px;                  
+                height: auto;                 
+                padding: 10px;             
+                font: 12px sans-serif;        
+                background: lightsteelblue;   
+                border: 0px;      
+                border-radius: 8px;           
+                pointer-events: none;         
+            }
+
+            ul { 
+                display: block;
+                list-style-type: disc;
+                margin-top: 1em;
+                margin-bottom: 1 em;
+                margin-left: 0;
+                margin-right: 0;
+                padding-left: 40px;
+            }
+
+            ol {
+                display: block;
+                list-style-type: decimal;
+                margin-top: 1em;
+                margin-bottom: 1em;
+                margin-left: 0;
+                margin-right: 0;
+                padding-left: 40px;
+            }
+
+            .key-dot {
+                display: inline-block;
+                height: 10px;
+                margin-right: .5em;
+                width: 10px;
+            }
+
+            .legend2 {
+                float:left;
+                margin-right: 1em;
+                padding:10,10,0,5;
+                font-size: 12px;
+            }
+
+           /* rect:hover {
+                fill: yellowgreen ;
+            } */
+            
+            .regular-checkbox {
+                -webkit-appearance: none;
+                background-color: #fafafa;
+                border: 1px solid #cacece;
+                box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+                padding: 9px;
+                border-radius: 3px;
+                display: inline-block;
+                position: relative;
+            }
+            .regular-checkbox:active, .regular-checkbox:checked:active {
+                box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+            }
+
+            .regular-checkbox:checked {
+                background-color: #e9ecee;
+                border: 1px solid #adb8c0;
+                box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
+                color: #99a1a7;
+            }
+
+            .regular-checkbox:checked:after {
+                content: '\2714';
+                font-size: 14px;
+                position: absolute;
+                top: 0px;
+                left: 3px;
+                color: #99a1a7;
+                
+            }
+            
+                        
+            .regular-radio:checked {
+                /*border: 5px solid #0DFF92;*/
+                border-radius: 16px;
+            }
+
+            .regular-radio{
+                /*background: #0DFF92;*/
+                border-radius: 16px;
+            }
+
+            
+           /*Section 3 - Chart1*/
+           .axis {
+                font: 10px sans-serif;
+            }
+
+            .axis path,
+            .axis line {
+            fill: none;
+            stroke: #D4D8DA;
+            stroke-width: 2px;
+            shape-rendering: crispEdges;
+            }
+
+            .line {
+                fill: none;
+                stroke: lightgreen;
+                stroke-width: 5px;
+            }
+           .overlay {
+                fill: none;
+                pointer-events: all;
+            }
+
+            .focus circle {
+                fill: #F1F3F3;
+                stroke: darkgreen;
+                stroke-width: 5px;
+            }
+            
+            .hover-line {
+                stroke: darkgreen;
+                stroke-width: 2px;
+                stroke-dasharray: 3,3;
+            }
+            
+            .dot {
+                fill:blue;
+            }
+            /*Section 3 - Chart2*/
+            
+            /* Section 3- Chart 3 */
+            .sectors_3 {
+                border: 1px solid gray;
+                padding:5px;
+            }
+            
+            .axis rect.rectbar:hover {
+                fill: yellowgreen;
+            }
+        </style>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#myContainer').fullpage({
+                    sectionsColor: ['#ff73a1', '#4BBFC3', '#7BAABE', '#4BBFC3', '#ff73a1', '#ff73a1'],
+                    anchors: ['firstPage', 'secondPage', '3rdPage', '4thPage','5thPage'],
+                    //menu: '#menu',
+                    slidesNavigation: true,
+                    scrollHorizontally: true,
+                    scrollBar: true,
+                    fixedElements: '#header, .footer',
+                    scrollHorizontallyKey: 'YWx2YXJvdHJpZ28uY29tX01mU2MyTnliMnhzU0c5eWFYcHZiblJoYkd4NVNRcg==',
+                    afterRender: function(){
+		                var pluginContainer = this;
+		                console.log("The resulting DOM structure is ready");
+                    },
+                    afterLoad: function(origin, destination, direction){
+                        console.log("afterLoad--" + "anchorLink: " + destination + " index: " + destination.index);
+                        
+                        switch (destination.index) {
+                            case 0:
+                                //No action    
+                                break;
+                            case 1:
+                                
+                                
+
+                                break;
+                            case 2:
+                                //Loaded for the first time when loaded from section 3
+                                drawChart3_1();
+                                break;
+                            case 3:
+                                //Loaded for the first time when loaded from section 4
+                                drawChart4_1();
+                                break;
+                            default:
+                                break;
+                        }
+                        if(destination.index == 0) {
+
+                        }
+                        //using index
+                        if(origin != null && origin.index == 2){
+                            //alert("Section 3 ended loading");
+                        }
+
+                        //using anchorLink
+                        if(origin != null && origin.anchor == 'secondSlide'){
+                            //alert("Section 2 ended loading");
+                        }
+                    },
+                    afterSlideLoad: function(anchorLink, index, slideAnchor, slideIndex){
+                        console.log("slideLoad--" + "anchorLink: " + anchorLink + " index: " + index + " slideAnchor: " + slideAnchor + " slideIndex: " + slideIndex);
+                        
+                        //anchorLink: Page or Section
+                        //slideAnchor: Destination slide Index
+                        switch (anchorLink.anchor) {
+                            case "firstPage":
+                                switch (slideAnchor.index) {
+                                    case 0:
+                                        
+                                        break;
+                                    case 1:
+                                        
+                                        break;
+                                    case 2:
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                break;
+                            case "secondPage":
+
+                            case "3rdPage":
+
+                                switch (slideAnchor.index) {
+                                    case 0:
+                                        drawChart3_1();
+                                        break;
+                                    case 1:
+                                        drawChart3_2();
+                                        break;
+                                    case 2:
+                                        drawChart3_3();
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                case "4thPage":
+
+                                    switch (slideAnchor.index) {
+                                        case 0:
+                                            drawChart4_1();
+                                            break;
+                                        case 1:
+                                            drawChart4_2();
+                                            break;
+                                        case 2:
+                                            drawChart4_3();
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                            default:
+                                break;
+                        }
+
+                        //3rd Page Index 2 = 3.2
+                        if(anchorLink.anchor == "3rdPage") {
+
+                            if(anchorLink.index == 2) {
+
+                            }
+                        }
+
+
+                    },
+                    onSlideLeave: function(anchorLink, index, slideIndex, direction){
+                        console.log("----------------");
+                        console.log("onSlideLeave--" + "anchorLink: " + anchorLink + " index: " + index + " slideIndex: " + slideIndex + " direction: " + direction);
+                    }
+                });
+            });
+
+            </script>
+
+
+    </head>
+<body>
+    <ul id="menu" style="display:none">
+            <li data-menuanchor="firstPage"><a href="#firstPage">First slide</a></li>
+            <li data-menuanchor="secondPage"><a href="#secondPage">Second slide</a></li>
+            <li data-menuanchor="3rdPage"><a href="#3rdPage">Third slide</a></li>
+            <li data-menuanchor="4thpage"><a href="#4thpage">Fourth slide</a></li>
+        </ul>
+        <div id="myContainer">
+
+            <!-- Section 1 - Introduction -->
+            <div class="section">
+                    <div class="slide">
+                        <div class="intro">
+                            <h1>Kiva CrowdFunding </h1>
+                            <h3 style="text-align: center; margin-right:120px;">Storytelling with Interactive Data Visualization</h3>
+                                <br/>
+                            <div class="div">
+                                <h2 style="margin-left:-40px"><b>Approach:</b> </h2>
+                                <span>Following the Hybrid Model of Data visualization starting with Interactive slideshow and then drilldown approach for each slide.</span>
+                                <br/><br/>
+
+                                <h2 style="margin-left:-40px"><b>Rules: </b></h2>
+
+                                <h2><b>Horizontal Scrolling: </b></h2>
+                                <span>Follows Drilldown approach ( expands the informations shown on the main slide but return back to current slide parent).
+                                Drill-down enables user to narrow data selection through either setting data filters to specific dictionary values or/and achieve similar result by visually choosing regions (e.g. rectangles) on interactive charts, so only values associated with regions will stay in data selection. In 2nd case charts behave as filters and as such eliminating need for filters if user prefer to use only selection tools like mouse.
+                                </span>
+                                <span>User can jump between sub-slides (horizontal) if necessary using small icons in the bottom though, but cannot jump between pages(slides)</span>
+                                </br><br/>
+                                <h2><b>Vertical Scrolling:</b></h2>
+                                <span>Follows Interactive Slideshow. Allowing user to navigate through owner design approach</span>
+
+                                <br/><br/><br/>
+                                <span style="color:blue">Slide Horizontally for Drilldown.<br/>
+                                    Slide Vertically for Interactive Slide show.<br/>
+                                </span>
+                                <h2 style="color:red;text-align:right">Click right Arrow now -></h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide"><h1>Overview</h1>
+                        <h2>Data Source:<a href="https://www.kaggle.com/kiva/data-science-for-good-kiva-crowdfunding" target="_blank">Kiva CrowdFunding</a></h2>
+                        <div class="div">
+                                <a href="https://www.kaggle.com/kiva" target="_blank">Kiva.org</a> is an online crowdfunding platform to extend financial services to poor and financially excluded people around the world. Kiva lenders have provided over $1 billion dollars in loans to over 2 million people.
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="slide"><h1>Prepare Data</h1>
+                        
+                        <div class="div">
+                            <span>
+                                Upon data files downloaded from <a href="https://www.kaggle.com/kiva/data-science-for-good-kiva-crowdfunding" target="_blank">Kiva.org</a>, it was cleaned using Data Preparation tools and corrected for missing values and populated with 0's as needed. 
+                                Aggregation was done into separate files for easy and flexibility for better visualization in d3.js
+
+                            </span>
+                            <span>
+                                Scroll down horizontally to take to next section or click on right arrow to take to first slide(home).
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section:2 Essay Section -->
+                <div class="section">
+                    <h1>Essay</h1>
+                    <div class="div">
+                        <h2>Overview:</h2>
+                        <span>
+                            Upon partial analysis of the data, trying to showcase available datapoints into Data visualization for better understanding the crowdfunding with respect to timelines, sectors, country, partners etc.<br/>
+                            In this effort, i was able to concentrate on timelines, sectors, countries, partners and ignored many other data points that are available in the dataset. <br/>
+                            Below are the two approaches built to better convey the understanding.
+                        </span>
+                        <br/><br/>
+
+                        <h2>Narrative:</h2>
+                        <div>
+                            Following is the process following in storytelling or Narrative Visualization <br/>
+                            <ol>
+                                <li>Incorporating the Hybrid Model for Narration. 
+                                    <br/>&nbsp;&nbsp;&nbsp;Horizontal scrolling signifies  Interactive Slideshow in traversing between Scenes and 
+                                    <br/>&nbsp;&nbsp;&nbsp;Vertical Scrolling enables Drill down model in between scenes.
+                                </li>
+                                <li>Two different Scenes are focussed. Timeline based on Funding Amount and Country Based.
+                                </li>
+                                <li>Funding Amount Displayed in terms of Millions with 2 digits prefix.</li>
+                            </ol>
+
+                        </div>
+                        <br/><br/>
+                        <h2>Charts:</h2>
+                        <ol>
+                            <li>
+                                <h3><b>Timeline Based:</b></h3>
+                                All charts in this category are based out of Funding(continious) dispersed considering various attributes. <br/>
+                                ex: Total Funding in each month, Total Funding across sectors.<br/>
+                                <ul>
+                                    <li>1.1: Total Funding Projected by Month - Simple Area Chart
+                                            <br/><span style="padding-left:30px;color:black">x-axes: Month-Year(Discrete), y-axes: Funded (Continious) [ Sum of funding across all sectors]
+                                                <br/> This chart gives overall projection of spending over time.
+                                            </span>
+                                    </li>
+                                    <li>1.2: Funding By Sector - Stacked Area Chart
+                                        <br/><span style="padding-left:30px;color:black">x-axes: Month-Year(Discrete), y-axes: Funded (Continious)
+                                        <br/>Following above, this will dig deeper into above scene and display in terms of Involved Sectors
+                                        </span>
+                                    </li>
+                                    <li>1.3: Sector Funding(Filters,Parametrized) - Bar Chart
+                                        <br/><span style="padding-left:30px;color:black">x-axes: Sectors(Discrete), y-axes: Funded (Continious)
+                                        <br/> Following above, this chart displays a visual way to identify top and bottom funded sectors.
+                                        </span>
+                                    </li>
+                                </ul>
+                                <br/>
+                            </li>
+                            <li>
+                                <h3><b>Country Based:</b></h3>
+                                All charts in this Scene are based out of Country(discrete) and spent funding till now.
+                                <ul>
+                                    <li>2.1: Total Funding By Country
+                                        <br/><span style="padding-left:30px;color:black">x-axes: Country, y-axes:Funded Amount.
+                                            <br/>This simple Bar chart is to project Funding between countries. 
+                                            <br/>Provided appropriate Sorting Triggers to get sense of spent.
+                                        </span>
+                                    </li>
+                                    <li>2.2: Partner/Sector Distribution By Country - Stacked Bar Chart
+                                    <br/><span style="padding-left:30px;color:black">x-axes: Country, y-axes:Partners and Sectors Count.
+                                        <br/>Following above scene, user can drill down and get more info on Partners and Sectors Count in each Country.
+                                        <br/> Use different filters, Triggers to get to understand with various combinations.
+                                    </span>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ol>
+
+                        <b>Note:</b> Using FullPage.js and you will see some Licensing errors if watched in Developer Tools. 
+                        Please Ignore and it won't affect the usage.
+                    </div>
+                </div>
+
+                <!--Section:3 Charts Section: Funding Amount Based -->
+                <div class="section">
+                    <div class="slide">
+                        <div class="divChart">
+                            <h2>Theme: Timeline Based Funding</h2>
+                            <div class="svgChart" id="divChart3_1" >
+                                <div class="div">
+                                    Below chart displays the amount of funding dispersed by Kiva CrowdFunding in each of the month starting from 2014-Jan to 2017-July
+                                    Hover the chart to see the funding in each projected month. ( Note: There is a drop in July 2017 has there is no much data available or missing in the dataset)
+                                    <br/>
+                                    Note: Date can be discrete and continious based on situation.    
+                                    <ul>
+                                        <li>Funding (continious) is taken as y-axes and other attributes( ex: Sectors [discrete] are taken as x-axes)</li>
+                                        <li>Three Annotations are created for the Peak Month ( March of each year)</li>
+                                        <li>Scatter plot was drawn for easy identifying each month on the area chart.</li>
+                                        <li>Mouse hovering will provide details on Funding in Millions.</li>
+                                    </ul>
+                                        
+
+                                    <br/>
+                                    <span style="color:black"><b>Annotations:</b> Noticed that there is typical spike in March in each year except 2014. It might be because of typical year end to most of the countries.</span>
+                                </div>
+                                <svg id="svgChart3_1" width="960" height="700"></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide">
+                            <div class="divChart">
+                                <h2>Stacked Area Chart - Sector Funding</h2>
+                                <div class="svgChart" id="divChart3_2">
+                                    <div class="div">
+                                        Continuing the prior slide, this slide is expanded to show the funding dispersed in various sectors.
+                                        <br/>
+                                        After reviewing the above chart, its good idea to drill down and see which Sector is getting more funding.
+                                        This Stacked Area Chart is drawn considering these factors into account.
+                                        Annotations are created for the same Peaks but main intention is to get the size of allocations.
+                                        By viewing it can be figured out that Agriculture, Food and Retail takes more share. But, again its not completely clear in understanding the sequence of sectors allocations. This is being addressed in next slide.
+                                        Mouse hovering displays info on hovering sectors, complete total funding.
+                                        <span>Used: schemeCategory20c for coloring Sectors</span>
+                                        <br/>
+                                        <span style="color:black"><b>Annotations:</b> Spikes in March is noticed espically from 2015 onwards.</span>
+                                        <svg id="svgChart3_2" width="960" height="700"></svg>
+                                    </br>
+                                        <div id="legend3_2"></div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                    </div>
+                    <div class="slide">
+                            <div class="divChart">
+                                <h2>Bar Chart - Sector Funding(Filters,Parametrized)</h2>
+                                <div class="svgChart" id="divChart3_3">
+                                    <div class="div">
+                                        Continuing the prior slide, this graph helps to view the content filtering parameterized selection of Sectors.
+                                        <br/>
+                                        Here is the bar chart which gives more detailed info for digesting the funding across sectors and their ranking.
+                                            Sectors are ordered in Highest to lowest and its more evident that Agriculture takes the first rank and Wholesale takes least funding.
+                                            Annotations are created for the same.
+                                            Apart from that, this slide is also equipped with Parameterized searching using Checkboxes and Refresh button.
+                                        <span>Used: schemeCategory20c for coloring Sectors</span>
+                                        <br/>
+                                        <span style="color:black"><b>Annotations:</b> Highest Funding and Lower Funding Sector</span>
+                                        <h3>
+                                            <div id="sectors" style="margin:10px"> </div>
+                                        </h3>
+                                         <p class="sectors_3">
+                                             <button id="bSubmit" onclick="javascript:Refresh_Chart3_3()" style="font-size:15px;padding: 8px 32px;color:white;background-color: #4CAF50;vertical-align: middle" >Refresh</button>
+                                         </p>
+
+                                        <svg id="svgChart3_3" width="960" height="700"></svg>
+                                    </br>
+                                        <div id="legend3_3"></div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <!-- End of Section 3 -->
+
+                
+                <!--Section:4 Charts Section: Country Based -->
+                <div class="section">
+                    <div class="slide">
+                        <div class="divChart">
+                            <h2>Theme: Country Based Funding</h2>
+                            <div class="svgChart" id="divChart4_1" >
+                                <div class="div">
+                                    Below chart displays the Funding dispersed for different countries. x-axes takes countries and y-axes takes the continous variable Funding amount.
+                                    <br/>
+                                    This gives idea of 1st and 2nd top Funded Country.
+                                    Users can sort the data based out of country or funded amount using radio buttons.
+                                    <br/>
+                                    <span style="color:black"><b>Annotations:</b> Phillipines taking 1st top funded country followed by Kenya.</span>
+                                    <br/>
+                                    <div style="font-size:10px;text-align: left;color:blue;" >
+                                            <p><input class="regular-checkbox regular-radio" type="radio" name="sort" value="funded" id="chk41_1" onclick="javascript:drawChart4_1()" >&nbsp;Sort by Funded
+                                            </p>
+                                            <p><input class="regular-checkbox regular-radio" type="radio" name="sort" value="country" id="chk41_2" onclick="javascript:drawChart4_1()" >&nbsp;Sort by Country
+                                            </p>
+                                    </div>
+                                    <div class="legend6">
+                                        <h3>Legend</h3>
+                                        <div id="legend"></div>
+                                    </div>
+                                    <svg id="svgChart4_1" width="1100" height="700"></svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide">
+                            <div class="divChart">
+                                <h2>Stacked Bar Chart - Partner/Sector Distribution</h2>
+                                <div class="svgChart" id="divChart4_2">
+                                    <div class="div">
+                                        <ul>
+                                            <li>Once reviewing about chart, reviewing the sectors, partners in each of these countries would give us more info and we can even see if there is any co-relation.</li>
+                                            <li>Drawing a Stacked Bar Chart with Countries and Stack Counts of Partners and Sum of Sectors.</li>
+                                            <li>Here we have used annotation for Highest Partners (Kenya).</li>
+                                            <li>Provided a way to Sort based on Total and Revere Partners and Sectors to get some insights.</li>
+                                            <li>Provided a third Filter of filtering Countries who had more than 5 Partners( Avg partner count)</li>
+                                        </ul>
+                                        <br/>
+                                        <span style="color:black"><b>Annotations:</b> Kenya takes the highest in Partners with ratio of 3 partners per sector.</span>
+                                        <br/>
+                                        <span>Use Sort and Reverse checkboxes to get sense of partners and sectors for each country.</span>
+
+                                        <div style="font-size:10px;text-align: left;color:blue" >
+                                            <p><input class="regular-checkbox" type="checkbox" id="chk42_1" onclick="javascript:drawChart4_2()" >&nbsp;Sort by Total Count
+                                            </p>
+                                            <p><input class="regular-checkbox" type="checkbox" id="chk42_2" onclick="javascript:drawChart4_2()" >&nbsp;Reverse Layout
+                                            </p>
+                                            <p><input class="regular-checkbox" type="checkbox" id="chk42_3" onclick="javascript:drawChart4_2()" >&nbsp;Average Partner Countries(> 5)
+                                            </p>
+                                        </div>
+                                        <svg id="svgChart4_2" width="960" height="700"></svg>
+                                    </br>
+                                        <div id="legend4_2"></div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                    </div>
+                    <div class="slide" style="display:none">
+                            <div class="divChart">
+                                <h2>Bar Chart - Sector Funding(Filters,Parametrized)</h2>
+                                <div class="svgChart" id="divChart4_3">
+                                    <div class="div">
+                                        Continuing the prior slide, this graph helps to view the content filtering parameterized selection based on sum of sectors and partners. Reason behind this chart is to find the coorelation between Partners, sector counts in each country.
+                                        Partners and Sectors color alignment can be easil changed using checkbox: Reverse Layout. This helps to see the variation of stack bars for pattern. Ex: When Sectors are botton in Stacked Bar chart, you see all countries are aligning, but not in other way.
+                                        Provided a way to Get Countries who has Partners more than average.
+                                        <br/>
+                                        <span style="color:black"><b>Annotations:</b> Highest Partners Country</span>
+                                        <h3>
+                                            <div id="sectors" style="margin:10px"> </div>
+                                        </h3>
+                                         <!-- <p class="sectors_3">
+                                             <button id="bSubmit" onclick="javascript:Refresh_Chart3_3()" >Refresh Chart</button>
+                                         </p> -->
+
+                                        <svg id="svgChart4_3" width="960" height="700"></svg>
+                                    </br>
+                                        <div id="legend4_3"></div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <!-- End of Section 4 -->
+
+                <!-- Section:5 Conclusion Section -->
+                <div class="section">
+                        <h1>Conclusion</h1>
+                        <div class="div">
+                            <h2>Methodology</h2>
+                                    Following the Hybrid Model using Interactive Slideshow with Drilldown <br/>
+                                    Charts are Based on: <br/>
+                                    <ol>
+                                    <li>    Timeline Based: Main strategy around these charts is to find the funding spread across different sectors with various timelines into scope.</li>
+                                    <li>    Country Based: Main strategy is to find the funding spent in each country and what other factors are being contributed like Partners, Sectors etc.</li>
+                                </ol>
+                            <h2>Conclusion:</h2>
+                            <span>
+                            <ol>
+                                <li>Considering the Analysis and this Visualizations ,found that there is pretty good distribution of Sectors across different countries but there is lot variation on Funding.</li>
+                                <li>More Partners, more Funding</li>
+                                <li>Funding spikes during month of March and sometimes December.</li>
+                                <li>Can be Expanded:<br/>
+                                    a. Partners specific Performance <br/>
+                                    b. MPI Data analysis ( data available in kiva website)
+                                </li>
+                            </ol>
+
+                            </span>
+    
+                        </div>
+                        
+                        <span> Thanks for Reviewing!</span>
+                    </div>
+
+            </div>
+
+    <input type="hidden" id="_4" value="3" />
+
+    <script>
+    
+    </script>
+
+</body>
+</html>
