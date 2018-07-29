@@ -571,9 +571,6 @@ var anot4 = g.append("text")
     .attr("fill", "blue")
     .text("Lowest funded Sector: Wholesale");
 
-
-
-
     d3.select("#svgChart3_2").style("display", "block");
 });
 
@@ -811,7 +808,7 @@ g.selectAll("rect")
         div.transition()        
             .duration(500)      
             .style("opacity", 0);   
-    })
+    });
 
     
     var chkbox0 = document.getElementById("chk0");
@@ -1189,9 +1186,10 @@ g.selectAll("rect")
             .style("opacity", 0);   
     });
 
+    d3.select("#svgChart4_1").style("display", "block");
 });
 
-d3.select("#svgChart4_1").style("display", "block");
+
 
 }
 
@@ -1387,9 +1385,12 @@ var anot1 = g.append("text")
     .attr("dy","1.0em")
     .text( 58  );
     
-});
 
     d3.select("#svgChart4_2").style("display", "block");
+
+});
+
+    
 }
 
 
