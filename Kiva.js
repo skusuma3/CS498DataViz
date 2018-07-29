@@ -95,7 +95,7 @@ $(document).ready(function() {
                                 drawChart4_2();
                                 break;
                             case 2:
-                                drawChart4_3();
+                                //drawChart4_3();
                                 break;
                             default:
                                 break;
@@ -112,6 +112,13 @@ $(document).ready(function() {
                 }
             }
 
+            
+        var fpcell = document.getElementsByClassName("fp-tableCell");
+
+        for (index = 0; index < fpcell.length; ++index) {
+                fpcell[index].style.verticalAlign = "top";
+                //console.log(fpcell[index]);
+            }
 
         },
         onSlideLeave: function(anchorLink, index, slideIndex, direction){

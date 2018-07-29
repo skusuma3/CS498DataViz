@@ -704,7 +704,7 @@ var x = d3.scaleBand()
 var y = d3.scaleLinear()
     .range([height, 0]);
 
-var colorScale = d3.scaleOrdinal(d3.schemeCategory10);
+var colorScale = d3.scaleOrdinal(d3.schemeCategory20c);
 
 //Draw the Legend
 var legend = document.getElementById("legend3_3");
@@ -1112,7 +1112,7 @@ g.selectAll("rect")
             annot1_1.append("tspan")
             .attr("x",  x1("Kenya")+50)
             .attr("dy","1.0em")
-            .text("2nd top funded Country");
+            .text("2nd top funded Country-Kenya");
             
             annot1_1.append("tspan")
             .attr("x",  x1("Kenya")+50)
@@ -1163,7 +1163,7 @@ g.selectAll("rect")
             annot1_1.append("tspan")
             .attr("x",  x1("Philippines")+50)
             .attr("dy","1.0em")
-            .text("1st top funded Country");
+            .text("1st top funded Country-Philippines");
             
             annot1_1.append("tspan")
             .attr("x",  x1("Philippines")+50)
@@ -1389,185 +1389,182 @@ var anot1 = g.append("text")
     
 });
 
-
-d3.select("#svgChart4_2").style("display", "block");
-
-
+    d3.select("#svgChart4_2").style("display", "block");
 }
 
 
-// Chart : Country vs (stack of Partners, Sectors)
-function drawChart4_3() {
+// // Chart : Country vs (stack of Partners, Sectors)
+// function drawChart4_3() {
 
-hideAllCharts();
+// hideAllCharts();
 
-d3.select("#svgChart4_3").style("display", "block");
+// d3.select("#svgChart4_3").style("display", "block");
 
-var div = d3.select("body").append("div")   
-    .attr("class", "tooltip")               
-    .style("opacity", 0);
+// var div = d3.select("body").append("div")   
+//     .attr("class", "tooltip")               
+//     .style("opacity", 0);
     
-var svg = d3.select("#svgChart4_3"),
-margin = {top: 20, right: 20, bottom: 90, left: 60},
-width = +svg.attr("width") - margin.left - margin.right,
-height = +svg.attr("height") - margin.top - margin.bottom,
-g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+// var svg = d3.select("#svgChart4_3"),
+// margin = {top: 20, right: 20, bottom: 90, left: 60},
+// width = +svg.attr("width") - margin.left - margin.right,
+// height = +svg.attr("height") - margin.top - margin.bottom,
+// g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-var x = d3.scaleBand()
-.rangeRound([0, width])
-.paddingInner(0.05)
-.align(0.1);
+// var x = d3.scaleBand()
+// .rangeRound([0, width])
+// .paddingInner(0.05)
+// .align(0.1);
 
-var y = d3.scaleLinear()
-.rangeRound([height, 0]);
+// var y = d3.scaleLinear()
+// .rangeRound([height, 0]);
 
-//var z = d3.scaleOrdinal()
-//    .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
-var z = d3.scaleOrdinal(d3.schemeCategory10);
+// //var z = d3.scaleOrdinal()
+// //    .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+// var z = d3.scaleOrdinal(d3.schemeCategory10);
 
-//var y1 = d3.scaleLinear()
-//    .rangeRound([height, 0]);
+// //var y1 = d3.scaleLinear()
+// //    .rangeRound([height, 0]);
 
-// define the line
-/* var valueline = d3.line()
-.x(function(d) { return x(d.country); })
-.y(function(d) { return y(d.partners); })
-//.curve(d3.curveCatmullRomOpen);
-.curve(d3.curveLinear); */
-
-
-/* d3.csv("data/country_funding_sector1.csv", function(error, data1) {
-    data1.forEach(function(d) {
-    d.country = d.country;
-    d.funded_amount = +d.funded_amount;
-    d.partners=+d.partners;
-    d.sectors=+d.sectors
-}); */
+// // define the line
+// /* var valueline = d3.line()
+// .x(function(d) { return x(d.country); })
+// .y(function(d) { return y(d.partners); })
+// //.curve(d3.curveCatmullRomOpen);
+// .curve(d3.curveLinear); */
 
 
-//d3.csv("data/country_funding_sector1_1.csv", function(d, i, columns) {
-d3.csv("data/country_sector_partners_count.csv", function(d, i, columns) {
-
-//d.total = +d[columns[2] / (+d[columns[2]] + +d[columns[3]])
-
-for (i = 2, t = 0; i < columns.length; ++i) t += d[columns[i]] = +d[columns[i]];
-d.total = t;
-//d.total = d[columns[i]]
-return d;
-}, function(error, data) {
-if (error) throw error;
-
-//data.forEach(function(x){delete x.funded_amount});
-
-var keys = data.columns.slice(2);
-
-data.sort(function(a, b) { return b.total - a.total; });
+// /* d3.csv("data/country_funding_sector1.csv", function(error, data1) {
+//     data1.forEach(function(d) {
+//     d.country = d.country;
+//     d.funded_amount = +d.funded_amount;
+//     d.partners=+d.partners;
+//     d.sectors=+d.sectors
+// }); */
 
 
-x.domain(data.map(function(d) { return d.country; }));
-y.domain([0, d3.max(data, function(d) { return d.total; })]).nice();
-z.domain(keys);
+// //d3.csv("data/country_funding_sector1_1.csv", function(d, i, columns) {
+// d3.csv("data/country_sector_partners_count.csv", function(d, i, columns) {
 
-//y1.domain([0, d3.max(data, function(d) { return d.funded_amount; })]).nice();
-//yDomainLine =  data.map(function(d) { return d.funded_amount; });
+// //d.total = +d[columns[2] / (+d[columns[2]] + +d[columns[3]])
 
-//var myData = data.filter(function(d) { return d.total > 50000 });
+// for (i = 2, t = 0; i < columns.length; ++i) t += d[columns[i]] = +d[columns[i]];
+// d.total = t;
+// //d.total = d[columns[i]]
+// return d;
+// }, function(error, data) {
+// if (error) throw error;
 
-g.append("g")
-.selectAll("g")
-.data( d3.stack().keys(keys)(data))
-.enter().append("g")
-  .attr("fill", function(d) { return z(d.key); })
-.selectAll("rect")
-.data(function(d) { return d; })
-.enter().append("rect")
-  .attr("x", function(d) { return x(d.data.country); })
-  .attr("y", function(d) { return y(d[1]); })
-  .attr("height", function(d) { return y(d[0]) - y(d[1]); })
-  .attr("width", x.bandwidth())
-  .on("mouseover", function(d) {      
-        div.transition()        
-            .duration(200)      
-            .style("opacity", .9);      
-        //div .html(formatTime(d.date) + "<br/>"  + d.close)  
-        //div .html("<b>Country:</b>" + d.country + "<br/><b>Sectors Count</b>:"  + d.sectors)  
-        div .html("<b>Country:</b>  " + d.data.country + "<br/><b>Partners Count</b>:    "  + d.data.partners + "<br/><b>Sectors Count</b>:   "  + d.data.sectors + "<br/><b>Ratio:" + d3.format(".2f")(d.data.sectors/d.data.partners) + "</b>")
-            .style("left", (d3.event.pageX) + "px")     
-            .style("top", (d3.event.pageY - 28) + "px");    
+// //data.forEach(function(x){delete x.funded_amount});
+
+// var keys = data.columns.slice(2);
+
+// data.sort(function(a, b) { return b.total - a.total; });
+
+
+// x.domain(data.map(function(d) { return d.country; }));
+// y.domain([0, d3.max(data, function(d) { return d.total; })]).nice();
+// z.domain(keys);
+
+// //y1.domain([0, d3.max(data, function(d) { return d.funded_amount; })]).nice();
+// //yDomainLine =  data.map(function(d) { return d.funded_amount; });
+
+// //var myData = data.filter(function(d) { return d.total > 50000 });
+
+// g.append("g")
+// .selectAll("g")
+// .data( d3.stack().keys(keys)(data))
+// .enter().append("g")
+//   .attr("fill", function(d) { return z(d.key); })
+// .selectAll("rect")
+// .data(function(d) { return d; })
+// .enter().append("rect")
+//   .attr("x", function(d) { return x(d.data.country); })
+//   .attr("y", function(d) { return y(d[1]); })
+//   .attr("height", function(d) { return y(d[0]) - y(d[1]); })
+//   .attr("width", x.bandwidth())
+//   .on("mouseover", function(d) {      
+//         div.transition()        
+//             .duration(200)      
+//             .style("opacity", .9);      
+//         //div .html(formatTime(d.date) + "<br/>"  + d.close)  
+//         //div .html("<b>Country:</b>" + d.country + "<br/><b>Sectors Count</b>:"  + d.sectors)  
+//         div .html("<b>Country:</b>  " + d.data.country + "<br/><b>Partners Count</b>:    "  + d.data.partners + "<br/><b>Sectors Count</b>:   "  + d.data.sectors + "<br/><b>Ratio:" + d3.format(".2f")(d.data.sectors/d.data.partners) + "</b>")
+//             .style("left", (d3.event.pageX) + "px")     
+//             .style("top", (d3.event.pageY - 28) + "px");    
         
-        })
-    .on("mouseout", function(d) {       
-        div.transition()        
-            .duration(500)      
-            .style("opacity", 0);   
-    });
+//         })
+//     .on("mouseout", function(d) {       
+//         div.transition()        
+//             .duration(500)      
+//             .style("opacity", 0);   
+//     });
 
-g.append("g")
-  .attr("class", "axis")
-  .attr("transform", "translate(0," + height + ")")
-  .call(d3.axisBottom(x))
-  .selectAll("text")
-    .attr("y", 0)
-    .attr("x", 9)
-    .attr("dy", ".35em")
-    .attr("transform", "rotate(90)")
-    .style("text-anchor", "start");
+// g.append("g")
+//   .attr("class", "axis")
+//   .attr("transform", "translate(0," + height + ")")
+//   .call(d3.axisBottom(x))
+//   .selectAll("text")
+//     .attr("y", 0)
+//     .attr("x", 9)
+//     .attr("dy", ".35em")
+//     .attr("transform", "rotate(90)")
+//     .style("text-anchor", "start");
 
-g.append("text")             
-  .attr("transform",
-        "translate(" + (width/2) + " ," + 
-                       (height + margin.top + 70) + ")")
-  .style("text-anchor", "middle")
-  .attr("class", "label")
-  .text("Countries");
+// g.append("text")             
+//   .attr("transform",
+//         "translate(" + (width/2) + " ," + 
+//                        (height + margin.top + 70) + ")")
+//   .style("text-anchor", "middle")
+//   .attr("class", "label")
+//   .text("Countries");
 
-g.append("g")
-  .attr("class", "axis")
-  .call(d3.axisLeft(y).ticks(null, "s"))
-.append("text")
-  /*.attr("x", 2)
-  .attr("y", y(y.ticks().pop()) + 0.5)
-  .attr("dy", "0.32em")
-  .attr("fill", "#000")
-  .attr("font-weight", "bold")*/
-  .attr("transform", "rotate(-90)")
-  .attr("y", -margin.left+10)
-  .attr("x",0 - (height / 2))
-  .attr("dy", "0.35em")
-  .attr("fill", "#000")
-  .attr("class", "label")
-  .style("text-anchor", "middle")
-  .text("Partners|Sectors Count");
+// g.append("g")
+//   .attr("class", "axis")
+//   .call(d3.axisLeft(y).ticks(null, "s"))
+// .append("text")
+//   /*.attr("x", 2)
+//   .attr("y", y(y.ticks().pop()) + 0.5)
+//   .attr("dy", "0.32em")
+//   .attr("fill", "#000")
+//   .attr("font-weight", "bold")*/
+//   .attr("transform", "rotate(-90)")
+//   .attr("y", -margin.left+10)
+//   .attr("x",0 - (height / 2))
+//   .attr("dy", "0.35em")
+//   .attr("fill", "#000")
+//   .attr("class", "label")
+//   .style("text-anchor", "middle")
+//   .text("Partners|Sectors Count");
 
-    // Add the valueline path.
-/*  g.append("path")
-    //.data([data])
-    .attr("d", valueline(data))
-    .attr("id", 'tag1') // assign ID
-    .attr("class", "line"); */
+//     // Add the valueline path.
+// /*  g.append("path")
+//     //.data([data])
+//     .attr("d", valueline(data))
+//     .attr("id", 'tag1') // assign ID
+//     .attr("class", "line"); */
 
 
 
-var legend = g.append("g")
-  .attr("font-family", "sans-serif")
-  .attr("font-size", 10)
-  .attr("text-anchor", "end")
-.selectAll("g")
-.data(keys.slice().reverse())
-.enter().append("g")
-  .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+// var legend = g.append("g")
+//   .attr("font-family", "sans-serif")
+//   .attr("font-size", 10)
+//   .attr("text-anchor", "end")
+// .selectAll("g")
+// .data(keys.slice().reverse())
+// .enter().append("g")
+//   .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
 
-legend.append("rect")
-  .attr("x", width - 19)
-  .attr("width", 19)
-  .attr("height", 19)
-  .attr("fill", z);
+// legend.append("rect")
+//   .attr("x", width - 19)
+//   .attr("width", 19)
+//   .attr("height", 19)
+//   .attr("fill", z);
 
-legend.append("text")
-  .attr("x", width - 24)
-  .attr("y", 9.5)
-  .attr("dy", "0.32em")
-  .text(function(d) { return d; });
-});
+// legend.append("text")
+//   .attr("x", width - 24)
+//   .attr("y", 9.5)
+//   .attr("dy", "0.32em")
+//   .text(function(d) { return d; });
+// });
 
-}
+// }

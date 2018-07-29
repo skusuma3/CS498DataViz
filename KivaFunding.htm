@@ -22,12 +22,6 @@
         <!--link rel="stylesheet" type="text/css" href="https://github.com/alvarotrigo/fullPage.js/blob/master/dist/fullpage.css" />
         <link rel="stylesheet" type="text/css" href="https://github.com/alvarotrigo/fullPage.js/blob/master/examples/examples.css" /-->
 
-        <script type="text/javascript">
-            
-
-            </script>
-
-
     </head>
 <body>
     <ul id="menu" style="display:none">
@@ -36,15 +30,19 @@
             <li data-menuanchor="3rdPage"><a href="#3rdPage">Third slide</a></li>
             <li data-menuanchor="4thpage"><a href="#4thpage">Fourth slide</a></li>
         </ul>
+        
+        <!-- <div id="header">Header</div> -->
+        <div id="footer" class="footer"><b style="color:blue">Reader-Driven:</b> Slide Horizontal, <b style="color:blue">Author-Driven:</b> Slide Vertical </div>
+
         <div id="myContainer">
 
             <!-- Section 1 - Introduction -->
             <div class="section">
-                    <div class="slide">
-                        <div class="intro">
-                            <h1>Kiva CrowdFunding </h1>
-                            <h3 style="text-align: center; margin-right:120px;">Storytelling with Interactive Data Visualization</h3>
-                                <br/>
+                    <h1>Kiva CrowdFunding </h1>
+                    <h3 style="text-align: center;">Storytelling with Interactive Data Visualization</h3>
+                <div class="slide ">
+                    <div class="intro">
+                        <br/>
                             <div class="div">
                                 <h2 style="margin-left:-40px"><b>Approach:</b> </h2>
                                 <span>Following the Hybrid Model of Data visualization with balancing Autor-Driven and giving flexibility to the Reader driving towards Reader-Driven approaches in each slide. <br/>
@@ -54,15 +52,18 @@
                                 <h2 style="margin-left:-40px"><b>Rules: </b></h2>
 
                                 <h2><b>Horizontal Scrolling: </b></h2>
-                                <span>Follows Drilldown approach ( expands the informations shown on the main slide but return back to current slide parent), reader can navigate to any of slides in that scope.
-                                In each Drill-down slide reader was allowed to use triggers to narrow data selection through either setting data filters to specific dictionary values or/and achieve similar result by visually choosing regions (e.g. rectangles) on interactive charts, so only values associated with regions will stay in data selection. 
+                                <span>
+                                    Follows Reader-Driven and Drilldown approach ( expands the informations shown on the main slide but return back to current slide parent), <br/>
+                                    Reader can navigate to any of slides in that scope.<br/>
+                                    In each Drill-down slide reader was allowed to use triggers to narrow data selection through either setting data filters to specific dictionary values or/and achieve similar result by visually choosing regions.
+                                    <br/>&nbsp;&nbsp;(e.g. rectangles) on interactive charts, so only values associated with regions will stay in data selection. <br/>
+                                    Visual Structuring: user was provided dots at the bottom of the screen, enables to know where they are and giving them flexibility to jump as needed.
                                 </span>
-                                <span>Visual Structuring: user was provided dots at the bottom of the screen, enalbes to know where they are and giving them flexibility to jump as needed.</span>
+                                
                                 </br>
-                                <span></span>
                                 <br/>
                                 <h2><b>Vertical Scrolling:</b></h2>
-                                <span>Follows Interactive Slideshow. Allowing user to navigate through owner design approach</span>
+                                <span>Follows Interactive Slideshow. Allowing user to navigate through Author-Driven approach.</span>
 
                                 <br/><br/><br/>
                                 <span style="color:blue">Slide Horizontally for Drilldown.<br/>
@@ -70,76 +71,77 @@
                                 </span>
                                 <h2 style="color:red;text-align:right">Click right Arrow now -></h2>
                             </div>
-                        </div>
-                    </div>
-                    <div class="slide"><h1>Overview</h1>
-                        <h2>Data Source:<a href="https://www.kaggle.com/kiva/data-science-for-good-kiva-crowdfunding" target="_blank">Kiva CrowdFunding</a></h2>
-                        <div class="div">
-                                <a href="https://www.kaggle.com/kiva" target="_blank">Kiva.org</a> is an online crowdfunding platform to extend financial services to poor and financially excluded people around the world. Kiva lenders have provided over $1 billion dollars in loans to over 2 million people.
-                            </span>
-                        </div>
-                    </div>
-                    
-                    <div class="slide"><h1>Prepare Data</h1>
-                        
-                        <div class="div">
-                            <span>
-                                Upon data files downloaded from <a href="https://www.kaggle.com/kiva/data-science-for-good-kiva-crowdfunding" target="_blank">Kiva.org</a>, it was cleaned using Data Preparation tools and corrected for missing values and populated with 0's as needed. 
-                                Aggregation was done into separate files for easy and flexibility for better visualization in d3.js
-
-                            </span>
-                            <span>
-                                Scroll down horizontally to take to next section or click on right arrow to take to first slide(home).
-                            </span>
-                        </div>
                     </div>
                 </div>
+                <div class="slide"><h1>Overview</h1>
+                    <h2>Data Source:<a href="https://www.kaggle.com/kiva/data-science-for-good-kiva-crowdfunding" target="_blank">Kiva CrowdFunding</a></h2>
+                    <div class="div">
+                            <a href="https://www.kaggle.com/kiva" target="_blank">Kiva.org</a> is an online crowdfunding platform to extend financial services to poor and financially excluded people around the world. Kiva lenders have provided over $1 billion dollars in loans to over 2 million people.
+                        </span>
+                    </div>
+                </div>
+                    
+                <div class="slide"><h1>Prepare Data</h1>
+                    
+                    <div class="div">
+                        <ol>
+                            <li>Upon data files downloaded from <a href="https://www.kaggle.com/kiva/data-science-for-good-kiva-crowdfunding" target="_blank">Kiva.org</a></li>
+                            <li>Data was cleaned using Data Preparation tools - Tableau Prep</li>
+                            <li>Corrected for missing values and populated with 0's as needed.</li>
+                            <li>Aggregation was done into separate files for easy and flexibility for better visualization in d3.js</li>
 
-                <!-- Section:2 Essay Section -->
-                <div class="section">
-                    <h1>Essay</h1>
-                    <div class="slide">
-                        <div class="div">
-                            <h2>Overview:</h2>
-                            <span>
+                        </ol>
+                        <span>
+                            Scroll down horizontally to take to next section or click on right arrow to take to first slide(home).
+                        </span>
+                    </div>
+                    
+                </div>
+
+                
+            </div>
+
+            <!-- Section:2 Essay Section -->
+            <div class="section" style="vertical-align: top;">
+                <h1>Essay</h1>
+                <div class="slide">
+                    <div class="div">
+                        <h2>Overview:</h2>
+                        <span>
                                 Upon partial analysis of the data, trying to showcase available datapoints into Data visualization for better understanding the crowdfunding with respect to timelines, sectors, country, partners etc.<br/>
                                 In this effort, i was able to concentrate on timelines, sectors, countries, partners and ignored many other data points that are available in the dataset. <br/>
                                 Below are the two approaches built to better convey the understanding.
-                            </span>
-                            <br/><br/>
+                        </span>
+                        <br/><br/>
 
-                            <h2>Narrative:</h2>
-                            <table>
-                                <tr>
-                                    <td>
-                                    <div>
-                                        Following is the process following in storytelling or Narrative Visualization <br/>
-                                        <ol>
-                                            <li>Genre -> Incorporating the Hybrid Model (Autor-Driven and then Reader-Driven) for Narration. 
-                                                <br/>&nbsp;&nbsp;&nbsp;Author-Driven: Vertical Scrolling enables Drill down model in between scenes.
-                                                <br/>&nbsp;&nbsp;&nbsp;Reader-Driven: Horizontal scrolling signifies  Interactive Slideshow in traversing between Scenes and 
-                                            </li>
-                                            <li>Design Dimensions:
-                                                <br/>&nbsp;&nbsp;&nbsp;Highlighting: Each slide has annotations to focus on important events
-                                                <br/>&nbsp;&nbsp;&nbsp;Tranistion guidance: Slides with drill down has left and right arrows
-                                                <br/>&nbsp;&nbsp;&nbsp;Messaging: each chart enabled with Tooltips to inform the required message.
-                                                <br/>&nbsp;&nbsp;&nbsp;Visual Structuring: Enabled scrollbar for vertical navigation(Author-Driven) and dots ( bottom of screen) for Horizontal slides(Reader-Driven)
-                                            </li>
-                                            <li>Two different Scenes are focussed. Timeline based on Funding Amount and Country Based.
-                                            </li>
-                                            <li>Funding Amount Displayed in terms of Millions with 2 digits prefix.</li>
-                                        </ol>
+                        <h2>Narrative:</h2>
+                                <div>
+                                    Following is the process following in storytelling or Narrative Visualization <br/>
+                                    <div id="holder">
+                                            <img src="img/structure.PNG" alt="Visual Structuring" style="width:100%;height:100%"/>
+                                        </div>
+                                    
+                                    <br/>
+                                    <ol>
+                                        <li>Genre -> Incorporating the Hybrid Model (Author-Driven and then Reader-Driven) for Narration. 
+                                            <br/>&nbsp;&nbsp;&nbsp;Author-Driven: Vertical Scrolling enables Drill down model in between scenes.
+                                            <br/>&nbsp;&nbsp;&nbsp;Reader-Driven: Horizontal scrolling signifies  Interactive Slideshow in traversing between Scenes and 
+                                        </li>
+                                        <li>Design Dimensions:
+                                            <br/>&nbsp;&nbsp;&nbsp;Highlighting: Each slide has annotations to focus on important events
+                                            <br/>&nbsp;&nbsp;&nbsp;Tranistion guidance: Slides with drill down has left and right arrows
+                                            <br/>&nbsp;&nbsp;&nbsp;Messaging: Each chart enabled with Tooltips to inform the required message.
+                                            <br/>&nbsp;&nbsp;&nbsp;Visual Structuring: Enabled scrollbar for vertical navigation(Author-Driven) and dots ( bottom of screen) for Horizontal slides(Reader-Driven)
+                                        </li>
+                                        <li>Two different Scenes are focussed. Timeline based on Funding Amount and Country Based.
+                                        </li>
+                                        <li>Funding Amount Displayed in terms of Millions with 2 digits prefix.</li>
+                                    </ol>
 
-                                    </div>
-                                </td>
-                                <td>
-                                    <img src="img/structure.PNG" alt="Visual Structuring">
-                                </td>
-                                </tr>
-                            </table>
+                                </div>
 
-                            <b>Note:</b> Using FullPage.js and you will see some Licensing errors if watched in Developer Tools. 
-                                Please Ignore and it won't affect the usage.
+                        <b>Note:</b> Using FullPage.js and you will see some Licensing errors if watched in Developer Tools. 
+                            Please Ignore and it won't affect the usage.
 
                         </div>
                     </div>
@@ -193,12 +195,15 @@
 
                     </div>
                 </div>
+            </div>
 
                 <!--Section:3 Charts Section: Funding Amount Based -->
                 <div class="section">
+                        <h1>Theme: Timeline Based Funding</h1>
                     <div class="slide">
+                            <h2>Area Chart - Total Funding</h2>
                         <div class="divChart">
-                            <h2>Theme: Timeline Based Funding</h2>
+                            
                             <div class="svgChart" id="divChart3_1" >
                                 <div class="div">
                                     Below chart displays the amount of funding dispersed by Kiva CrowdFunding in each of the month starting from 2014-Jan to 2017-July
@@ -221,52 +226,53 @@
                         </div>
                     </div>
                     <div class="slide">
+                            <h2>Stacked Area Chart - Sector Funding</h2>
                             <div class="divChart">
-                                <h2>Stacked Area Chart - Sector Funding</h2>
+                                
                                 <div class="svgChart" id="divChart3_2">
                                     <div class="div">
-                                        Continuing the prior slide, this slide is expanded to show the funding dispersed in various sectors.
-                                        <br/>
-                                        After reviewing the above chart, its good idea to drill down and see which Sector is getting more funding.
-                                        This Stacked Area Chart is drawn considering these factors into account.
-                                        Annotations are created for the same Peaks but main intention is to get the size of allocations.
-                                        By viewing it can be figured out that Agriculture, Food and Retail takes more share. But, again its not completely clear in understanding the sequence of sectors allocations. This is being addressed in next slide.
-                                        Mouse hovering displays info on hovering sectors, complete total funding.
-                                        <span>Used: schemeCategory20c for coloring Sectors</span>
+                                        <li>Continuing the prior slide, this slide is expanded to show the funding dispersed in various sectors.</li>
+                                        <li>After reviewing the above chart, its good idea to drill down and see which Sector is getting more funding.</li>
+                                        <li>This Stacked Area Chart is drawn considering these factors into account.</li>
+                                        <li>Annotations are created for the same Peaks but main intention is to get the size of allocations.</li>
+                                        <li>By viewing it can be figured out that Agriculture, Food and Retail takes more share. But, again its not completely clear in understanding the sequence of sectors allocations. This is being addressed in next slide.</li>
+                                        <li>Mouse hovering displays info on hovering sectors, complete total funding.</li>
+                                        <br/><span style="color:black">Legend</span> schemeCategory20c for coloring Sectors
+                                        <div id="legend3_2"></div>
                                         <br/>
                                         <span style="color:black"><b>Annotations:</b> Spikes in March is noticed espically from 2015 onwards.</span>
-                                        <svg id="svgChart3_2" width="960" height="700"></svg>
+                                        <svg id="svgChart3_2" width="960" height="650"></svg>
                                     </br>
-                                        <div id="legend3_2"></div>
+                                        
                                     </div>
                                     
                                 </div>
                             </div>
                     </div>
                     <div class="slide">
-                            <div class="divChart">
-                                <h2>Bar Chart - Sector Funding(Filters,Parametrized)</h2>
+                            <h2>Bar Chart - Sector Funding(Filters,Parametrized)</h2>
+                            <div class="divChart">                                
                                 <div class="svgChart" id="divChart3_3">
                                     <div class="div">
-                                        Continuing the prior slide, this graph helps to view the content filtering parameterized selection of Sectors.
+                                        <li>Continuing the prior slide, this graph helps to view the content filtering parameterized selection of Sectors.</li>
+                                        <li>Here is the bar chart which gives more detailed info for digesting the funding across sectors and their ranking.</li>
+                                        <li>Sectors are ordered in Highest to lowest and its more evident that Agriculture takes the first rank and Wholesale takes least funding.</li>
+                                        <li>Annotations are created for the same.</li>
+                                        <li>Apart from that, this slide is also equipped with Parameterized searching using Checkboxes and Refresh button.</li>
                                         <br/>
-                                        Here is the bar chart which gives more detailed info for digesting the funding across sectors and their ranking.
-                                            Sectors are ordered in Highest to lowest and its more evident that Agriculture takes the first rank and Wholesale takes least funding.
-                                            Annotations are created for the same.
-                                            Apart from that, this slide is also equipped with Parameterized searching using Checkboxes and Refresh button.
-                                        <span>Used: schemeCategory20c for coloring Sectors</span>
-                                        <br/>
-                                        <span style="color:black"><b>Annotations:</b> Highest Funding and Lower Funding Sector</span>
+                                        <span style="color:black">Legend: </span>schemeCategory20c for coloring Sectors
+                                        <div id="legend3_3"></div>
+                                        <br/><span style="color:black"><b>Annotations:</b> Highest Funding and Lower Funding Sector</span>
                                         <h3>
-                                            <div id="sectors" style="margin:10px"> </div>
+                                            <div id="sectors" style="margin:0px"> </div>
                                         </h3>
                                          <p class="sectors_3">
-                                             <button id="bSubmit" onclick="javascript:Refresh_Chart3_3()" style="font-size:15px;padding: 8px 32px;color:white;background-color: #4CAF50;vertical-align: middle" >Refresh</button>
+                                             <button id="bSubmit" onclick="javascript:Refresh_Chart3_3()" style="font-size:15px;color:white;background-color: #4CAF50;vertical-align: middle" >Refresh</button>
                                          </p>
 
-                                        <svg id="svgChart3_3" width="960" height="700"></svg>
+                                        <svg id="svgChart3_3" width="960" height="750" style="vertical-align: top"></svg>
                                     </br>
-                                        <div id="legend3_3"></div>
+                                        
                                     </div>
                                     
                                 </div>
@@ -278,9 +284,10 @@
                 
                 <!--Section:4 Charts Section: Country Based -->
                 <div class="section">
+                    <h1>Theme: Country Based Funding</h1>
                     <div class="slide">
+                            <h2>Bar Chart: Total Funding</h2>
                         <div class="divChart">
-                            <h2>Theme: Country Based Funding</h2>
                             <div class="svgChart" id="divChart4_1" >
                                 <div class="div">
                                     Below chart displays the Funding dispersed for different countries. x-axes takes countries and y-axes takes the continous variable Funding amount.
@@ -292,22 +299,21 @@
                                     <br/>
                                     <div style="font-size:10px;text-align: left;color:blue;" >
                                             <p><input class="regular-checkbox regular-radio" type="radio" name="sort" value="funded" id="chk41_1" onclick="javascript:drawChart4_1()" >&nbsp;Sort by Funded
-                                            </p>
-                                            <p><input class="regular-checkbox regular-radio" type="radio" name="sort" value="country" id="chk41_2" onclick="javascript:drawChart4_1()" >&nbsp;Sort by Country
+                                            <input class="regular-checkbox regular-radio" type="radio" name="sort" value="country" id="chk41_2" onclick="javascript:drawChart4_1()" >&nbsp;Sort by Country
                                             </p>
                                     </div>
                                     <div class="legend6">
                                         <h3>Legend</h3>
                                         <div id="legend"></div>
                                     </div>
-                                    <svg id="svgChart4_1" width="1100" height="700"></svg>
+                                    <svg id="svgChart4_1" width="1100" height="770"></svg>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="slide">
-                            <div class="divChart">
-                                <h2>Stacked Bar Chart - Partner/Sector Distribution</h2>
+                            <h2>Stacked Bar Chart - Partner/Sector Distribution</h2>
+                            <div class="divChart">                                
                                 <div class="svgChart" id="divChart4_2">
                                     <div class="div">
                                         <ul>
@@ -323,11 +329,10 @@
                                         <span>Use Sort and Reverse checkboxes to get sense of partners and sectors for each country.</span>
 
                                         <div style="font-size:10px;text-align: left;color:blue" >
-                                            <p><input class="regular-checkbox" type="checkbox" id="chk42_1" onclick="javascript:drawChart4_2()" >&nbsp;Sort by Total Count
-                                            </p>
-                                            <p><input class="regular-checkbox" type="checkbox" id="chk42_2" onclick="javascript:drawChart4_2()" >&nbsp;Reverse Layout
-                                            </p>
-                                            <p><input class="regular-checkbox" type="checkbox" id="chk42_3" onclick="javascript:drawChart4_2()" >&nbsp;Average Partner Countries(> 5)
+                                            <p>
+                                                <input class="regular-checkbox" type="checkbox" id="chk42_1" onclick="javascript:drawChart4_2()" >&nbsp;Sort by Total Count
+                                                <input class="regular-checkbox" type="checkbox" id="chk42_2" onclick="javascript:drawChart4_2()" >&nbsp;Reverse Layout
+                                                <input class="regular-checkbox" type="checkbox" id="chk42_3" onclick="javascript:drawChart4_2()" >&nbsp;Average Partner Countries(> 5)
                                             </p>
                                         </div>
                                         <svg id="svgChart4_2" width="960" height="700"></svg>
@@ -338,7 +343,7 @@
                                 </div>
                             </div>
                     </div>
-                    <div class="slide" style="display:none">
+                    <!-- <div class="slide" style="display:none">
                             <div class="divChart">
                                 <h2>Bar Chart - Sector Funding(Filters,Parametrized)</h2>
                                 <div class="svgChart" id="divChart4_3">
@@ -351,9 +356,9 @@
                                         <h3>
                                             <div id="sectors" style="margin:10px"> </div>
                                         </h3>
-                                         <!-- <p class="sectors_3">
+                                         <p class="sectors_3">
                                              <button id="bSubmit" onclick="javascript:Refresh_Chart3_3()" >Refresh Chart</button>
-                                         </p> -->
+                                         </p>
 
                                         <svg id="svgChart4_3" width="960" height="700"></svg>
                                     </br>
@@ -362,7 +367,7 @@
                                     
                                 </div>
                             </div>
-                    </div>
+                    </div> -->
                 </div>
                 <!-- End of Section 4 -->
 
@@ -394,6 +399,9 @@
                         </div>
                         
                         <span> Thanks for Reviewing!</span>
+                        <div>
+                            Click <a href="https://skusuma3.github.io/CS498DataViz/KivaFunding.htm">Home</a>
+                        </div>
                     </div>
 
             </div>
