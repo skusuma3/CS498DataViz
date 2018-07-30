@@ -728,7 +728,7 @@ yDomainBar = myData.map(function(d) { return d.funded_amount; });
 
 x.domain(myData.map(function(d) { return d.sector; }));
 //y.domain([0, d3.max(yDomainBar)]);
-y.domain([0, d3.max(myData, function(d) { return d.funded_amount; })+10000000]);
+y.domain([0, d3.max(myData, function(d) { return d.funded_amount; })+1e6]);
 //adding 10M to draw one more y ticks in the graph
 
 
