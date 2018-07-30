@@ -160,18 +160,19 @@
                                 ex: Total Funding in each month, Total Funding across sectors.<br/>
                                 <ul>
                                     <li>1.1: Total Funding Projected by Month - Simple Area Chart
-                                            <br/><span style="padding-left:30px;color:black">x-axes: Month-Year(Discrete), y-axes: Funded (Continious) [ Sum of funding across all sectors]
+                                            <br/><span style="padding-left:30px;color:black">x-axes: Month-Year(Continious, Discrete) (range: date extent), y-axes: Funded (Continious in Millions) [ Sum of funding across all sectors]( Range: 0 to max(funded + 1M )). Added 1M to extend y-axes for better visibility.
                                                 <br/>In trying to consider funding growth (consolidated over individual data values) is better displayed in Area Chart. This chart gives overall projection of spending over time.
                                                 <br/> Equipped with Line graph for better projection of Total funding in each defined month. Created Annotations during peak dates.
+
                                             </span>
                                     </li>
                                     <li>1.2: Funding By Sector - Stacked Area Chart
-                                        <br/><span style="padding-left:30px;color:black">x-axes: Month-Year(Discrete), y-axes: Funded (Continious)
+                                        <br/><span style="padding-left:30px;color:black">x-axes: Month-Year(Continious,Discrete)(range: date extent), y-axes: Funded (Continious in Millions)
                                         <br/>Following above, this will dig deeper into above scene and display in terms of Involved Sectors. Since we are consolidating Individual Sectors is better displayed using Stacked Area Chart.
                                         </span>
                                     </li>
                                     <li>1.3: Sector Funding(Filters,Parametrized) - Bar Chart
-                                        <br/><span style="padding-left:30px;color:black">x-axes: Sectors(Discrete), y-axes: Funded (Continious)
+                                        <br/><span style="padding-left:30px;color:black">x-axes: Sectors(Discrete), y-axes: Funded (Continious in Millions)
                                         <br/> Following above, Ideally, displaying Bar chart makes more sense as we have definite Sectors. This chart displays a visual way to identify top and bottom funded sectors. Highest and Lowest funded sectors are displayed and Readers can filter based on Sectors.
                                         </span>
                                     </li>
@@ -183,7 +184,7 @@
                                 All charts in this Scene are based out of Country(discrete) and spent funding till now.
                                 <ul>
                                     <li>2.1: Total Funding By Country
-                                        <br/><span style="padding-left:30px;color:black">x-axes: Country(Discrete) , y-axes:Funded Amount(Continious).
+                                        <br/><span style="padding-left:30px;color:black">x-axes: Country(Discrete) , y-axes:Funded Amount(Continious in Millions).
                                             <br/>Considering the values of Discrete and Continious, Bar chart if very appropriate. This simple Bar chart is to project Funding between countries. 
                                             <br/>Provided appropriate Sorting Triggers to get sense of spent. Providing Sort by Funding and Country gives more idea on Funding distribution. Annotations, Legends are displayed appropriately.
                                         </span>

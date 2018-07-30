@@ -975,7 +975,7 @@ if(sortcountry.checked) {
 
 var x1 = d3.scaleBand()
         .rangeRound([0,width])
-        .paddingInner(0.05);
+        .paddingInner(0.35);
 
 var color = d3.scaleOrdinal()
     .range(countryColors)
@@ -1211,7 +1211,7 @@ height = +svg.attr("height") - margin.top - margin.bottom;
 
 var x = d3.scaleBand()
 .rangeRound([0, width])
-.paddingInner(0.05)
+.paddingInner(0.3)
 .align(0.1);
 
 var y = d3.scaleLinear()
